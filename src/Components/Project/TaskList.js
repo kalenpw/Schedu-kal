@@ -6,14 +6,13 @@ import NewTask from "./NewTask";
 class TaskList extends React.Component {
     constructor(props) {
         super(props);
-        // console.log(props);
     }
 
     generateTasks() {
         let tasks = this.props.tasks.map((task) => {
             return (
-                <Task task={task}
-                    deleteTask={this.props.deleteItem}
+                <Task id={task.id} task={task}
+                    deleteTask={this.props.deleteTask}
                 ></Task>
             )
         });
@@ -25,6 +24,7 @@ class TaskList extends React.Component {
             <ul>
                 {this.generateTasks()}
                 <NewTask
+                    addTask={this.props.addTask}
                 ></NewTask>
             </ul>
         )

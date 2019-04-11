@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+import ProjectPreview from "./ProjectPreview.js";
+
 class ProjectList extends React.Component {
     constructor(props) {
         super(props);
@@ -29,15 +31,9 @@ class ProjectList extends React.Component {
     generateProjects() {
         let projectEles = this.state.projects.map((project) => {
             return (
-                <React.Fragment key={project.id}>
-                    <li>
-                        <Link
-                            to={"/projects/" + project.id}
-                        >
-                            {project.name}
-                        </Link>
-                    </li>
-                </React.Fragment>
+                <div className="column">
+                    <ProjectPreview project={project}></ProjectPreview>
+                </div>
             )
         })
         return projectEles;
@@ -46,8 +42,10 @@ class ProjectList extends React.Component {
     render() {
         return (
             <div>
-                <h1>Projects</h1>
-                {this.generateProjects()}
+                <h1 className="title">Projects</h1>
+                <div className="columns">
+                    {this.generateProjects()}
+                </div>
             </div>
         )
     }

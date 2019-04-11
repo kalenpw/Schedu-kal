@@ -9,12 +9,10 @@ const Delete = styled.span`
 class Task extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
 
     handleClick = (event) => {
         this.props.deleteTask(this.props.id);
-        // console.log(event);
     }
 
     render() {

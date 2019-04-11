@@ -17,12 +17,12 @@ class NewTask extends React.Component {
     }
 
     handleKeyUp = (event) => {
-        if (event.key == "Enter") {
+        if (event.key == "Enter" && event.target.value.trim()) {
             const task = {
-                task: event.target.value,
+                description: event.target.value.trim(),
                 id: Math.random(),
             }
-            this.props.addItem(task);
+            this.props.addTask(task);
             this.newTaskText.current.value = '';
         }
     }

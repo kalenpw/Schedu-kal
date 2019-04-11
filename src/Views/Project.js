@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TaskList from "./TaskList";
+import TaskList from "../Components/Project/TaskList";
 
 class Project extends React.Component {
     constructor(props) {
@@ -24,7 +24,9 @@ class Project extends React.Component {
     }
 
     generateTasks() {
-        let tasks = this.state.project.tasks.map((task) => {
+        const project = this.state.project;
+        const tasks = project.tasks; 
+        let tasksEle = tasks.map((task) => {
             return <li>{task}</li>
         })
         return tasks;
@@ -33,7 +35,7 @@ class Project extends React.Component {
     deleteTask = (id) => {
         const project = this.state.project;
         const tasks = project.tasks;
-        const updatedTasks = tasks.filter((task) => {
+        project.tasks = tasks.filter((task) => {
             return task.id !== id;
         });
         this.setState({ project: project })
@@ -41,8 +43,7 @@ class Project extends React.Component {
 
     addTask = (task) => {
         const project = this.state.project;
-        const tasks = project.tasks;
-        tasks.push(task);
+        project.tasks.push(task);
         this.setState({ project: project })
     }
 

@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import Home from "./Components/Home.js";
-import Project from "./Components/Project/Project";
+import Project from "./Views/Project";
 
 import Test from "./Test";
 
 function Error(props) {
-    console.log("hmmJK:");
     return (
         <h1>does not exist</h1>
     )
