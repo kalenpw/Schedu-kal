@@ -11,17 +11,33 @@ class ProjectList extends React.Component {
                 {
                     id: 1,
                     name: "Learn react",
+                    dateDue: new Date('2019-04-15'),
                     tasks: [
-                        'React Router',
-                        'React native'
+                        {
+                            dueDate: new Date(),
+                            description: 'React Router',
+                            id: 1,
+                        },
+                        {
+                            dueDate: new Date(),
+                            description: 'React native',
+                            id: 2
+                        },
                     ]
                 },
                 {
                     id: 2,
                     name: "Get a job",
+                    dateDue: new Date('2019-04-13'),
                     tasks: [
-                        'Apply places',
-                        'Accept offer'
+                        {
+                            description: 'Apply places',
+                            id: 1,
+                        },
+                        {
+                            description: 'Accept offer',
+                            id: 2
+                        },
                     ]
                 }
             ]
@@ -31,7 +47,7 @@ class ProjectList extends React.Component {
     generateProjects() {
         let projectEles = this.state.projects.map((project) => {
             return (
-                <div className="column">
+                <div key={project.id} className="column">
                     <ProjectPreview project={project}></ProjectPreview>
                 </div>
             )
