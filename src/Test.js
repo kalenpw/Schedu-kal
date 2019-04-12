@@ -1,23 +1,44 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import DatePicker from 'react-datepicker';
 
-function About(){
-    return <h1>about</h1>
+import "react-datepicker/dist/react-datepicker.css";
+
+class ExampleCustomInput extends React.Component {
+    render() {
+        return (
+            <button
+                className="example-custom-input"
+                onClick={this.props.onClick}>
+                value
+            </button>
+        )
+    }
+
 }
 
-function Index(){
-    return <h1>index</h1>
-}
+class Test extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            startDate: null
+        }
+    }
 
-function Test(){
-    return (
-        <Router>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-            <Route path="/" exact component={Index}/>
-            <Route path="/about" component={About}/>
-        </Router>
-    )
+    handleChange = () => {
+        console.log("Changed");
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                <DatePicker
+                    customInput={<ExampleCustomInput />}
+                    selected={this.state.startDate}
+                    onChange={this.handleChange} />
+            </React.Fragment>
+        )
+
+    }
 }
 
 export default Test;

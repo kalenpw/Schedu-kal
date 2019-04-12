@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 import ProjectPreview from "./ProjectPreview.js";
 
@@ -44,11 +43,18 @@ class ProjectList extends React.Component {
         }
     }
 
+    updateProjectDateDue(id) {
+        console.log("Updating project", id);
+    }
+
     generateProjects() {
         let projectEles = this.state.projects.map((project) => {
             return (
                 <div key={project.id} className="column">
-                    <ProjectPreview project={project}></ProjectPreview>
+                    <ProjectPreview
+                        updateProjectDateDue={this.updateProjectDateDue}
+                        project={project}
+                    />
                 </div>
             )
         })

@@ -1,37 +1,40 @@
 import React from 'react';
-import Project from '../../Views/Project';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import {getDaysDifference, formatDate} from "../../Utils/date-utils";
+import ProjectDate from "./ProjectDate.js";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CardWrapper = styled.div`
     background-color: #222;
     border-radius: 5px;
-`
-
-const CardTitle = styled.p`
     color: #ddd;
-`
-const CardContent = styled.div`
-    color: #ddd;
+    
+    .card-header-title{
+        color: #ddd;
+    }
 `
 const DateDue = styled.span`
-    padding-right: 2px;
+    padding-right: 5px;
     padding-top: 2px;
     color: #777;
     font-size: .9rem;
+    cursor: pointer;
 `
 
 class ProjectPreview extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            startDate: null,
+            showDate: false,
+        }
     }
 
     generateTasks() {
         const tasks = this.props.project.tasks;
         const maxPreviewAmount = 5;
-        console.log(tasks);
         const tasksEle = tasks.map((task) => {
             return (
                 <li key={task.id}>
@@ -42,45 +45,38 @@ class ProjectPreview extends React.Component {
         return tasksEle.slice(0, maxPreviewAmount);
     }
 
-    getRemainingDateInfo() {
-        const project = this.props.project;
-        const dateDue = project.dateDue;
-        let formattedDate;
-        let daysRemaining;
-        if (dateDue) {
-            let today = new Date();
-            formattedDate = formatDate(dateDue);
-            daysRemaining = getDaysDifference(dateDue, today);
-        }
-        return {
-            formattedDate: formattedDate,
-            daysRemaining: daysRemaining
-        }
+    handleDateChange = (event) => {
+        this.props.project.dateDue = event;
+        this.forceUpdate();
     }
 
     render() {
         const project = this.props.project;
-        const dateInfo = this.getRemainingDateInfo();
         return (
-            <Link to={"/projects/" + project.id}>
-                <CardWrapper className="card">
-                    <header className="card-header">
-                        <CardTitle className="card-header-title">
-                            {project.name}
-                        </CardTitle>
-                        <DateDue>
-                            {dateInfo.formattedDate}
-                            <br />
-                            {dateInfo.daysRemaining}
-                        </DateDue>
-                    </header>
-                    <CardContent className="card-content">
-                        <ul>
-                            {this.generateTasks()}
-                        </ul>
-                    </CardContent>
-                </CardWrapper>
-            </Link>
+            <CardWrapper className="card">
+                <header className="card-header">
+                    <p className="card-header-title">
+                        {project.name}
+                    </p>
+                    <DatePicker
+                        customInput={<ProjectDate date={project.dateDue} />}
+                        selected={this.state.startDate}
+                        onChange={this.handleDateChange}
+                        popperPlacement="auto"
+                    />
+
+                </header>
+                <div className="card-content">
+                    <ul>
+                        {this.generateTasks()}
+                    </ul>
+                </div>
+                <footer className="card-footer">
+                    <Link className="card-footer-item" to={"/projects/" + project.id}>
+                        Details
+                    </Link>
+                </footer>
+            </CardWrapper>
         )
     }
 }

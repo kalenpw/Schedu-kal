@@ -23,15 +23,6 @@ class Project extends React.Component {
         }
     }
 
-    generateTasks() {
-        const project = this.state.project;
-        const tasks = project.tasks; 
-        let tasksEle = tasks.map((task) => {
-            return <li>{task}</li>
-        })
-        return tasks;
-    }
-
     deleteTask = (id) => {
         const project = this.state.project;
         const tasks = project.tasks;

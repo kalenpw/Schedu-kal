@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Input = styled.input`
     background-color: #444;
@@ -17,7 +17,7 @@ class NewTask extends React.Component {
     }
 
     handleKeyUp = (event) => {
-        if (event.key == "Enter" && event.target.value.trim()) {
+        if (event.key === "Enter" && event.target.value.trim()) {
             const task = {
                 description: event.target.value.trim(),
                 id: Math.random(),
