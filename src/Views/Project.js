@@ -46,12 +46,11 @@ class Project extends React.Component {
     }
 
     deleteTask = (id) => {
-        const project = this.state.project;
-        const tasks = project.tasks;
-        project.tasks = tasks.filter((task) => {
+        const taskEdits = this.state.taskEdits;
+        const newTasks = taskEdits.filter((task) => {
             return task.id !== id;
         });
-        this.setState({ project: project })
+        this.setState({ taskEdits: newTasks });
     }
 
     toggleEdit = () => {
@@ -66,7 +65,7 @@ class Project extends React.Component {
     addTask = (task) => {
         const taskEdits = this.state.taskEdits;
         taskEdits.push(task);
-        this.setState({taskEdits: taskEdits});
+        this.setState({ taskEdits: taskEdits });
     }
 
     cancelChanges = () => {
@@ -77,7 +76,7 @@ class Project extends React.Component {
     saveEdits = () => {
         const project = this.state.project;
         project.tasks = this.state.taskEdits;
-        this.setState({project: project});
+        this.setState({ project: project });
         this.setState({ isEditting: false });
     }
 
