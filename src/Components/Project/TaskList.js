@@ -22,7 +22,6 @@ class TaskList extends React.Component {
                 <Task id={task.id} task={task}
                     deleteTask={this.props.deleteTask}
                     isEditting={this.props.isEditting}
-                    editTask={this.props.editTask}
                 ></Task>
             )
         });
