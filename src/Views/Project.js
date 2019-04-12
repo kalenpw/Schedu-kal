@@ -20,7 +20,21 @@ class Project extends React.Component {
                     }
                 ]
             },
+            isEditting: false,
         }
+    }
+
+    editTask = (id, description) => {
+        const project = this.state.project;
+        const tasks = project.tasks;
+        project.tasks = tasks.filter((task) => {
+            if(task.id === id){
+                task.description = description;
+            }
+            return true;
+        });
+        this.setState({ project: project });
+        // this.setState({isEditting: false});
     }
 
     deleteTask = (id) => {
@@ -32,6 +46,10 @@ class Project extends React.Component {
         this.setState({ project: project })
     }
 
+    toggleEdit = () => {
+        this.setState({isEditting: !this.state.isEditting});
+    }
+
     addTask = (task) => {
         const project = this.state.project;
         project.tasks.push(task);
@@ -41,12 +59,22 @@ class Project extends React.Component {
     render() {
         const name = this.state.project.name;
         const tasks = this.state.project.tasks;
+        const isEditting = this.state.isEditting;
+        const iconClass = isEditting ? 'far fa-save' : 'far fa-edit';
         return (
             <div>
-                <h1 className="title">{name}</h1>
+                <h1 className="title">{name}
+                    <button className="button is-primary is-pulled-right"
+                        onClick={this.toggleEdit} 
+                    >
+                        <i className={iconClass}></i>
+                    </button>
+                </h1>
                 <TaskList tasks={tasks}
                     addTask={this.addTask}
-                    deleteTask={this.deleteTask} 
+                    deleteTask={this.deleteTask}
+                    editTask={this.editTask}
+                    isEditting={this.state.isEditting}
                 />
             </div>
         )

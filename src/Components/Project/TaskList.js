@@ -3,6 +3,14 @@ import React from 'react';
 import Task from "./Task.js";
 import NewTask from "./NewTask";
 
+import styled from 'styled-components';
+
+const TasksList = styled.ul`
+    li{
+        padding: 1px;   
+    }
+`
+
 class TaskList extends React.Component {
     constructor(props) {
         super(props);
@@ -13,6 +21,8 @@ class TaskList extends React.Component {
             return (
                 <Task id={task.id} task={task}
                     deleteTask={this.props.deleteTask}
+                    isEditting={this.props.isEditting}
+                    editTask={this.props.editTask}
                 ></Task>
             )
         });
@@ -20,13 +30,17 @@ class TaskList extends React.Component {
     }
 
     render() {
+        const isEditting = this.props.isEditting;
         return (
-            <ul>
+            <TasksList>
                 {this.generateTasks()}
-                <NewTask
-                    addTask={this.props.addTask}
-                ></NewTask>
-            </ul>
+                {
+                    isEditting &&
+                    <NewTask
+                        addTask={this.props.addTask}
+                    ></NewTask>
+                }
+            </TasksList>
         )
     }
 }

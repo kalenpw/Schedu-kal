@@ -62,7 +62,7 @@ class ProjectPreview extends React.Component {
                         customInput={<ProjectDate date={project.dateDue} />}
                         selected={this.state.startDate}
                         onChange={this.handleDateChange}
-                        popperPlacement="auto"
+                        popperPlacement="right-start"
                     />
 
                 </header>
