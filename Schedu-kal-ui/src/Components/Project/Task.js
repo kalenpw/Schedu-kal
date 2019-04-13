@@ -20,6 +20,7 @@ class Task extends React.Component {
 
     handleChange = (event) => {
         this.props.task.description = event.target.value;
+        this.props.editTask(this.props.task);
     }
 
     generateTask() {

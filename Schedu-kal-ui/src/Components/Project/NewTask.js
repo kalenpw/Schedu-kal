@@ -19,6 +19,7 @@ class NewTask extends React.Component {
     handleKeyUp = (event) => {
         if (event.key === "Enter" && event.target.value.trim()) {
             const task = {
+                isNew: true,
                 description: event.target.value.trim(),
                 id: Math.random(),
             }

@@ -20,6 +20,7 @@ class TaskList extends React.Component {
         let tasks = this.props.tasks.map((task) => {
             return (
                 <Task id={task.id} task={task}
+                    editTask={this.props.editTask}
                     deleteTask={this.props.deleteTask}
                     isEditting={this.props.isEditting}
                 ></Task>

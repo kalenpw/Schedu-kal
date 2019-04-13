@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/projects', 'ProjectController@getProjects');
 Route::get('/projects/{id}', 'ProjectController@getProjectById');
 
+Route::post('/tasks/updateDescription', 'TaskController@updateTaskDescription');
+
 Route::get('/projects/dummyData', function () {
     \App\Project::query()->delete();
     $project1 = new \App\Project();
