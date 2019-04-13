@@ -11,14 +11,6 @@ class Test extends React.Component{
     }
 
     render(){
-        axios.get('http://localhost:8000/api/projects')
-            .then(response =>{
-                console.log(response);
-                // this.setState({response: response});
-            })
-            .catch(error =>{
-                console.log(error);
-            })
         return (
             <p>console</p>
         )

@@ -2,24 +2,13 @@ import React from 'react';
 
 import TaskList from "../Components/Project/TaskList";
 
+import ProjectApi from "../Api/projects";
+
 class Project extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            project: {
-                id: 1,
-                name: "Learn react",
-                tasks: [
-                    {
-                        id: 1,
-                        description: 'React Router',
-                    },
-                    {
-                        id: 2,
-                        description: 'React native',
-                    }
-                ]
-            },
+            project: null,
             taskEdits: [
 
             ],
@@ -27,8 +16,21 @@ class Project extends React.Component {
         };
     }
 
+    componentWillMount() {
+        const id = this.props.match.params.id;
+        ProjectApi.getProjectById(id)
+            .then(response => {
+                this.setState({ project: response }, () => {
+                    this.resetTaskEdits();
+                    console.log(this.state.project);
+                });
+            })
+    }
+
     componentDidMount() {
-        this.resetTaskEdits();
+        if (this.state.project) {
+            this.resetTaskEdits();
+        }
     }
 
     resetTaskEdits = () => {
@@ -81,6 +83,9 @@ class Project extends React.Component {
     }
 
     render() {
+        if (!this.state.project) {
+            return <div></div>
+        }
         const name = this.state.project.name;
         const taskEdits = this.state.taskEdits;
         const isEditting = this.state.isEditting;

@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/projects', 'ProjectController@getProjects');
+Route::get('/projects/{id}', 'ProjectController@getProjectById');
 
 Route::get('/projects/dummyData', function () {
     \App\Project::query()->delete();

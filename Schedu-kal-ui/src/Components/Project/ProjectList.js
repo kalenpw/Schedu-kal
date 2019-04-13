@@ -16,7 +16,6 @@ class ProjectList extends React.Component {
     componentWillMount() {
         ProjectApi.getProjects()
             .then(response => {
-                console.log(response);
                 this.setState({projects: response});
             });
     }
