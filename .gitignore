@@ -1,26 +1,26 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+Schedu-kal-ui/node_modules
+Schedu-kal-ui/.pnp
+Schedu-kal-ui/.pnp.js
 
 # testing
-/coverage
+Schedu-kal-ui/coverage
 
 # production
-/build
+Schedu-kal-ui/build
 
 # misc
-.DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+Schedu-kal-ui/.DS_Store
+Schedu-kal-ui/.env
+Schedu-kal-ui/.env.local
+Schedu-kal-ui/.env.development.local
+Schedu-kal-ui/.env.test.local
+Schedu-kal-ui/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+Schedu-kal-ui/npm-debug.log*
+Schedu-kal-ui/yarn-debug.log*
+Schedu-kal-ui/yarn-error.log*
 
 Schedu-kal-api/.*
