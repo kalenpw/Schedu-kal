@@ -2,45 +2,23 @@ import React from 'react';
 
 import ProjectPreview from "./ProjectPreview.js";
 
+import ProjectApi from "../../Api/projects";
+
 class ProjectList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            projects: [
-                {
-                    id: 1,
-                    name: "Learn react",
-                    dateDue: new Date('2019-04-15'),
-                    tasks: [
-                        {
-                            dueDate: new Date(),
-                            description: 'React Router',
-                            id: 1,
-                        },
-                        {
-                            dueDate: new Date(),
-                            description: 'React native',
-                            id: 2
-                        },
-                    ]
-                },
-                {
-                    id: 2,
-                    name: "Get a job",
-                    dateDue: new Date('2019-04-13'),
-                    tasks: [
-                        {
-                            description: 'Apply places',
-                            id: 1,
-                        },
-                        {
-                            description: 'Accept offer',
-                            id: 2
-                        },
-                    ]
-                }
-            ]
+            projects: null,
         }
+
+    }
+
+    componentWillMount() {
+        ProjectApi.getProjects()
+            .then(response => {
+                console.log(response);
+                this.setState({projects: response});
+            });
     }
 
     updateProjectDateDue(id) {
@@ -62,6 +40,9 @@ class ProjectList extends React.Component {
     }
 
     render() {
+        if(!this.state.projects){
+            return <div></div>
+        }
         return (
             <div>
                 <h1 className="title">Projects</h1>

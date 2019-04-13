@@ -17,7 +17,7 @@ class App extends Component {
         return (
             <Router>
                 <Link to="/">Home</Link>
-                {/* <Test/> */}
+                <Test/>
                 <div className="section hero is-dark is-fullheight">
                     <Switch>
                         <Route

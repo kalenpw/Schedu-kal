@@ -1,43 +1,27 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
+import axios from 'axios';
 
-import "react-datepicker/dist/react-datepicker.css";
-
-class ExampleCustomInput extends React.Component {
-    render() {
-        return (
-            <button
-                className="example-custom-input"
-                onClick={this.props.onClick}>
-                value
-            </button>
-        )
-    }
-
-}
-
-class Test extends React.Component {
-    constructor(props) {
+class Test extends React.Component{
+    constructor(props){
         super(props);
         this.state = {
-            startDate: null
+            response: ''
         }
     }
 
-    handleChange = () => {
-        console.log("Changed");
-    }
-
-    render() {
+    render(){
+        axios.get('http://localhost:8000/api/projects')
+            .then(response =>{
+                console.log(response);
+                // this.setState({response: response});
+            })
+            .catch(error =>{
+                console.log(error);
+            })
         return (
-            <React.Fragment>
-                <DatePicker
-                    customInput={<ExampleCustomInput />}
-                    selected={this.state.startDate}
-                    onChange={this.handleChange} />
-            </React.Fragment>
+            <p>console</p>
         )
-
     }
 }
 
