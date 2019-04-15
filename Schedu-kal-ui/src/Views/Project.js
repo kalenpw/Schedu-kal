@@ -130,7 +130,6 @@ class Project extends React.Component {
 
     toggleEdit = () => {
         const isEditting = this.state.isEditting;
-
         if (isEditting) {
             this.saveEdits();
         }
@@ -138,11 +137,12 @@ class Project extends React.Component {
         this.setState({ newTasks: [] });
         this.setState({ edittedTasks: [] });
         this.setState({ deletedTasks: [] });
-        this.setState({ isEditting: !this.state.isEditting });
+        this.setState({ isEditting: !isEditting });
     }
 
     cancelChanges = () => {
         this.updateProjectFromDatabase();
+        this.setState({isEditting: false});
     }
 
     render() {
