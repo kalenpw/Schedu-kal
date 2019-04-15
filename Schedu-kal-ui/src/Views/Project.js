@@ -97,7 +97,6 @@ class Project extends React.Component {
         }
 
         const edittedTasks = this.state.edittedTasks;
-        console.log("we editted", edittedTasks);
         for (let i = 0; i < edittedTasks.length; i++) {
             const task = edittedTasks[i];
             TaskApi.updateTask(task.id, task.description)
@@ -139,7 +138,7 @@ class Project extends React.Component {
         this.setState({ newTasks: [] });
         this.setState({ edittedTasks: [] });
         this.setState({ deletedTasks: [] });
-        this.setState({ isEditting: false });
+        this.setState({ isEditting: !this.state.isEditting });
     }
 
     cancelChanges = () => {
