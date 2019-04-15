@@ -22,6 +22,7 @@ Route::post('/projects/create', 'ProjectController@createProject');
 Route::get('/projects/{id}', 'ProjectController@getProjectById');
 
 Route::post('/tasks/updateDescription', 'TaskController@updateTaskDescription');
+Route::post('/tasks/create', 'TaskController@createTask');
 
 Route::get('/projects/dummyData', function () {
     \App\Project::query()->delete();

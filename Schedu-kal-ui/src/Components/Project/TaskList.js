@@ -37,6 +37,7 @@ class TaskList extends React.Component {
                 {
                     isEditting &&
                     <NewTask
+                        projectId={this.props.projectId}
                         addTask={this.props.addTask}
                     ></NewTask>
                 }

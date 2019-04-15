@@ -13,12 +13,14 @@ const Input = styled.input`
 class NewTask extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.newTaskText = React.createRef();
     }
 
     handleKeyUp = (event) => {
         if (event.key === "Enter" && event.target.value.trim()) {
             const task = {
+                projectId: this.props.projectId,
                 isNew: true,
                 description: event.target.value.trim(),
                 id: Math.random(),

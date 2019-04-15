@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -17,5 +18,20 @@ class TaskController extends Controller
         $taskToUpdate->description = $request->description;
         $taskToUpdate->save();
         return $taskToUpdate;
+    }
+
+    public function createTask(Request $request)
+    {
+        $validatedData = $request->validate([
+            'project_id' => 'required',
+            'description' =>'required',
+        ]);
+
+        $task = new \App\Task;
+        $task->description = $request->description;
+        $task->project_id = $request->project_id;
+        $task->dateDue = Carbon::createFromTimestampUTC(0);
+        $task->save();
+        return $task;
     }
 }

@@ -35,7 +35,7 @@ class Project extends React.Component {
             .then(response => {
                 this.setState({ project: response }, () => {
                     this.resetTaskEdits();
-                    console.log(this.state.project);
+                    // console.log(this.state.project);
                 });
             })
 
@@ -56,9 +56,15 @@ class Project extends React.Component {
     }
 
     addTask = (task) => {
-        const taskEdits = this.state.taskEdits;
-        taskEdits.push(task);
-        this.setState({ taskEdits: taskEdits });
+        const newTasks = this.state.newTasks;
+        const project = this.state.project;
+        const allTasks = project.tasks;
+        newTasks.push(task);
+        allTasks.push(task);
+        project.tasks = allTasks;
+        this.setState({project: project});
+        this.setState({ newTasks: newTasks });
+
     }
 
     editTask = (edittedTask) => {
@@ -85,6 +91,23 @@ class Project extends React.Component {
             TaskApi.updateTask(task.id, task.description)
                 .then(response => {
                     if (i === edittedTasks.length - 1) {
+                        this.updateProjectFromDatabase();
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+
+        const newTasks = this.state.newTasks;
+        console.log(this.state.newTasks);
+
+        console.log("*********");
+        for(let i = 0; i < newTasks.length; i++){
+            const task = newTasks[i];
+            console.log(task);
+            TaskApi.createTask(task.projectId, task.description)
+                .then(response => {
+                    console.log(response);
+                    if(i === newTasks.length - 1){
                         this.updateProjectFromDatabase();
                     }
                 })
@@ -150,6 +173,7 @@ class Project extends React.Component {
                     }
                 </h1>
                 <TaskList tasks={tasks}
+                    projectId={this.state.project.id}
                     addTask={this.addTask}
                     editTask={this.editTask}
                     deleteTask={this.deleteTask}
