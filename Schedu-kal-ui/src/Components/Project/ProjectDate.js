@@ -1,14 +1,14 @@
 import React from 'react';
-
+import styled from 'styled-components';
 import { getDaysDifference, formatDate } from "../../Utils/date-utils";
 import "react-datepicker/dist/react-datepicker.css";
 
+const DateDisplay = styled.p`
+    padding-top: 5px;
+    padding-right: 10px;
+`
 
 class ProjectDate extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     getRemainingDateInfo(date) {
         const dateDue = date;
         let formattedDate;
@@ -29,13 +29,13 @@ class ProjectDate extends React.Component {
         const dateInfo = this.getRemainingDateInfo(date);
         return (
             <React.Fragment>
-                <p onClick={this.props.onClick}
+                <DateDisplay onClick={this.props.onClick}
                     className="example-custom-input"
                 >
                     {dateInfo.formattedDate}
                     <br/>
                     {dateInfo.daysRemaining}
-                </p>
+                </DateDisplay>
             </React.Fragment>
         )
     }

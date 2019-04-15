@@ -8,6 +8,7 @@ const CardWrapper = styled.div`
     background-color: #222;
     border-radius: 5px;
     color: #ddd;
+    cursor: pointer;
     
     .card-header-title{
         color: #ddd;
@@ -28,7 +29,7 @@ class NewProject extends React.Component {
     }
 
     closeModal = () => {
-        this.setState({isModalVisible: false});
+        this.setState({ isModalVisible: false });
     }
 
     render() {
@@ -41,8 +42,7 @@ class NewProject extends React.Component {
                     <header className="card-header">
                         <p className="card-header-title">
                             New Project
-                    </p>
-
+                        </p>
                     </header>
                     <div className="card-content has-text-centered is-size-1">
                         <i className="fas fa-plus"></i>
@@ -52,13 +52,13 @@ class NewProject extends React.Component {
                     this.state.isModalVisible &&
                     <div className="modal is-active">
                         <div className="modal-background"
-                            onClick={this.closeModal} 
+                            onClick={this.closeModal}
                         ></div>
                         <div className="modal-content">
-                            <CreateProject/>
+                            <CreateProject />
                         </div>
-                        <button 
-                            className="modal-close is-large" 
+                        <button
+                            className="modal-close is-large"
                             aria-label="close"
                             onClick={this.closeModal}
                         ></button>

@@ -10,17 +10,15 @@ const CardWrapper = styled.div`
     background-color: #222;
     border-radius: 5px;
     color: #ddd;
-    
+    display: flex;
+    flex-direction: column;
+    height: 100%;    
     .card-header-title{
         color: #ddd;
     }
-`
-const DateDue = styled.span`
-    padding-right: 5px;
-    padding-top: 2px;
-    color: #777;
-    font-size: .9rem;
-    cursor: pointer;
+    .card-footer{
+        margin-top: auto;
+    }
 `
 
 class ProjectPreview extends React.Component {

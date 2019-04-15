@@ -13,7 +13,6 @@ const Input = styled.input`
 class NewTask extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.newTaskText = React.createRef();
     }
 

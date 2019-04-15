@@ -14,7 +14,7 @@ class ProjectController extends Controller
             'category' => 'required',
             'dateDue'=> 'required',
         ]);
-        $validated['dateDue'] = Carbon::createFromTimestampUTC($request->dateDue / 1000);
+        $validated['dateDue'] = Carbon::createFromTimestampUTC(round($request->dateDue / 1000));
         return \App\Project::create($validated);
     }
 

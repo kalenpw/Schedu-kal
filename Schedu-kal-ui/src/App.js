@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 import Home from "./Views/Home.js";
 import Project from "./Views/Project";
-
-import Test from "./Test";
 
 function Error(props) {
     return (

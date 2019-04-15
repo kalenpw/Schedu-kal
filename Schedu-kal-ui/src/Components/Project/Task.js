@@ -10,12 +10,8 @@ const EditWrapper = styled.li`
 `
 
 class Task extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleClick = (event) => {
-        this.props.deleteTask(this.props.id);
+        this.props.deleteTask(this.props.task.id);
     }
 
     handleChange = (event) => {
@@ -50,7 +46,6 @@ class Task extends React.Component {
     }
 
     render() {
-        const isEditting = this.props.isEditting;
         return (
             <div>
                 {this.generateTask()}
@@ -60,7 +55,3 @@ class Task extends React.Component {
 }
 
 export default Task;
-
-
-{/* <EditWrapper className="field">
-                </EditWrapper> */}

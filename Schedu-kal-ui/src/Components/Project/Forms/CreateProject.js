@@ -1,15 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
 import ProjectApi from "../../../Api/projects.js";
-
 import DatePicker from "react-datepicker";
 
-const DarkHeader = styled.h2`
-    color: red !important;
-`
-class ExampleCustomInput extends React.Component {
-
+class DateInput extends React.Component {
     handleClick = (event) => {
         console.log("clicked button");
     }
@@ -37,11 +30,11 @@ class CreateProject extends React.Component {
     }
 
     handleTitleChange = (event) => {
-        this.setState({title: event.target.value});
+        this.setState({ title: event.target.value });
     }
 
     handleCategoryChange = (event) => {
-        this.setState({category: event.target.value});
+        this.setState({ category: event.target.value });
     }
 
     handleDateChange = (event) => {
@@ -52,8 +45,9 @@ class CreateProject extends React.Component {
         event.preventDefault();
         ProjectApi.createProject(this.state.title, this.state.category, this.state.selectedDate.getTime())
             .then(response => {
-                console.log(response);
-            })
+                const newProjectId = response.id;
+                window.location.href = "/projects/" + newProjectId;
+            });
     }
 
     render() {
@@ -83,7 +77,7 @@ class CreateProject extends React.Component {
                         <p class="control">
                             <DatePicker
                                 withPortal
-                                customInput={<ExampleCustomInput />}
+                                customInput={<DateInput />}
                                 selected={this.state.selectedDate}
                                 onChange={this.handleDateChange} />
                         </p>
@@ -92,7 +86,7 @@ class CreateProject extends React.Component {
                     <div className="field">
                         <p class="control">
                             <button class="button is-primary"
-                                onClick={(event) => this.handleSubmit(event)} 
+                                onClick={(event) => this.handleSubmit(event)}
                             >Create</button>
                         </p>
                     </div>

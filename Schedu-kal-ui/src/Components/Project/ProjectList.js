@@ -1,8 +1,5 @@
 import React from 'react';
-
 import ProjectPreview from "./ProjectPreview.js";
-import NewProject from "./NewProject.js";
-
 import ProjectApi from "../../Api/projects.js";
 
 class ProjectList extends React.Component {

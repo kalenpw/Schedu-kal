@@ -5,13 +5,17 @@ import TaskList from "../Components/Project/TaskList";
 import ProjectApi from "../Api/projects";
 import TaskApi from "../Api/tasks";
 
-import { deepCopyList } from "../Utils/object-utils";
+import update from 'immutability-helper';
 
 class Project extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             project: null,
+            projectId: 0,
+            currentTasks: [
+
+            ],
             edittedTasks: [
 
             ],
@@ -33,45 +37,39 @@ class Project extends React.Component {
         const id = this.props.match.params.id;
         ProjectApi.getProjectById(id)
             .then(response => {
-                this.setState({ project: response }, () => {
-                    this.resetTaskEdits();
-                    // console.log(this.state.project);
-                });
-            })
-
-    }
-
-    componentDidMount() {
-        if (this.state.project) {
-            this.resetTaskEdits();
-        }
+                this.setState({ projectId: response.id });
+                this.setState({ currentTasks: response.tasks });
+                this.setState({ project: response });
+            });
     }
 
     deleteTask = (id) => {
-        const taskEdits = this.state.taskEdits;
-        const newTasks = taskEdits.filter((task) => {
+        const deletedTasks = this.state.deletedTasks;
+        const updatedTasks = update(deletedTasks, { $push: [id] });
+        this.setState({ deletedTasks: updatedTasks });
+
+        const currentTasks = this.state.currentTasks;
+        let updatedCurrentTasks = update(currentTasks, { $push: [] });
+        updatedCurrentTasks = updatedCurrentTasks.filter((task) => {
             return task.id !== id;
-        });
-        this.setState({ taskEdits: newTasks });
+        })
+        this.setState({ currentTasks: updatedCurrentTasks });
+        this.forceUpdate();
     }
 
     addTask = (task) => {
         const newTasks = this.state.newTasks;
-        const project = this.state.project;
-        const allTasks = project.tasks;
-        newTasks.push(task);
-        allTasks.push(task);
-        project.tasks = allTasks;
-        this.setState({project: project});
-        this.setState({ newTasks: newTasks });
-
+        const updatedTasks = update(newTasks, { $push: [task] });
+        const currentTasks = update(this.state.currentTasks, { $push: [task] });
+        this.setState({ currentTasks: currentTasks });
+        this.setState({ newTasks: updatedTasks });
     }
 
     editTask = (edittedTask) => {
         const taskId = edittedTask.id;
         const edittedTasks = this.state.edittedTasks;
         if (this.taskInList(taskId, edittedTasks)) {
-            const updatedTaks = edittedTasks.map((task) => {
+            edittedTasks.map((task) => {
                 if (taskId === task.id) {
                     task.description = edittedTask.description;
                 }
@@ -85,7 +83,21 @@ class Project extends React.Component {
     }
 
     saveEdits = () => {
+        const newTasks = this.state.newTasks;
+        for (let i = 0; i < newTasks.length; i++) {
+            const task = newTasks[i];
+            TaskApi.createTask(task.projectId, task.description)
+                .then(response => {
+                    if (i === newTasks.length - 1) {
+                        this.updateProjectFromDatabase();
+                    }
+                })
+                .catch(error => console.log(error)
+                );
+        }
+
         const edittedTasks = this.state.edittedTasks;
+        console.log("we editted", edittedTasks);
         for (let i = 0; i < edittedTasks.length; i++) {
             const task = edittedTasks[i];
             TaskApi.updateTask(task.id, task.description)
@@ -97,17 +109,12 @@ class Project extends React.Component {
                 .catch(error => console.log(error));
         }
 
-        const newTasks = this.state.newTasks;
-        console.log(this.state.newTasks);
-
-        console.log("*********");
-        for(let i = 0; i < newTasks.length; i++){
-            const task = newTasks[i];
-            console.log(task);
-            TaskApi.createTask(task.projectId, task.description)
+        const deletedTasks = this.state.deletedTasks;
+        for (let i = 0; i < deletedTasks.length; i++) {
+            const taskId = deletedTasks[i];
+            TaskApi.deleteTask(taskId)
                 .then(response => {
-                    console.log(response);
-                    if(i === newTasks.length - 1){
+                    if (i === newTasks.length - 1) {
                         this.updateProjectFromDatabase();
                     }
                 })
@@ -116,19 +123,11 @@ class Project extends React.Component {
     }
 
     taskInList = (id, list) => {
-        console.log(list);
         const matchingId = list.slice().filter((task) => {
-            console.log(task);
             return id === task.id;
         });
         return matchingId.length > 0;
     }
-    resetTaskEdits = () => {
-        const tasks = this.state.project.tasks.slice();
-        const taskEdits = JSON.parse(JSON.stringify(tasks));
-        this.setState({ taskEdits: taskEdits });
-    }
-
 
     toggleEdit = () => {
         const isEditting = this.state.isEditting;
@@ -137,22 +136,22 @@ class Project extends React.Component {
             this.saveEdits();
         }
         this.setState({ isEditting: !this.state.isEditting });
-    }
-
-
-    cancelChanges = () => {
-        this.resetTaskEdits();
+        this.setState({ newTasks: [] });
+        this.setState({ edittedTasks: [] });
+        this.setState({ deletedTasks: [] });
         this.setState({ isEditting: false });
     }
 
+    cancelChanges = () => {
+        this.updateProjectFromDatabase();
+    }
 
     render() {
         if (!this.state.project) {
             return <div></div>
         }
         const name = this.state.project.name;
-        // const taskEdits = this.state.taskEdits;
-        const tasks = deepCopyList(this.state.project.tasks);
+        const tasks = this.state.currentTasks;
         const isEditting = this.state.isEditting;
         const iconClass = isEditting ? 'far fa-save' : 'far fa-edit';
         return (

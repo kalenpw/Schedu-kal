@@ -9,6 +9,7 @@ export function deepCopyList(list){
             project_id: oldTask.project_id,
             created_at: oldTask.created_at,
             updated_at: oldTask.updated_at, 
+            isNew: oldTask.isNew,
         }
         newList.push(task);
     }    

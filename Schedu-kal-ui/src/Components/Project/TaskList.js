@@ -12,14 +12,10 @@ const TasksList = styled.ul`
 `
 
 class TaskList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     generateTasks() {
         let tasks = this.props.tasks.map((task) => {
             return (
-                <Task id={task.id} task={task}
+                <Task key={task.id} id={task.id} task={task}
                     editTask={this.props.editTask}
                     deleteTask={this.props.deleteTask}
                     isEditting={this.props.isEditting}
@@ -31,6 +27,7 @@ class TaskList extends React.Component {
 
     render() {
         const isEditting = this.props.isEditting;
+        // console.log(this.props.tasks);
         return (
             <TasksList>
                 {this.generateTasks()}

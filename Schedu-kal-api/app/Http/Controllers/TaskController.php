@@ -34,4 +34,13 @@ class TaskController extends Controller
         $task->save();
         return $task;
     }
+
+    public function deleteTask(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required'
+        ]);
+        $task = \App\Task::where('id', $request->id)->first();
+        return "deleted";
+    }
 }
