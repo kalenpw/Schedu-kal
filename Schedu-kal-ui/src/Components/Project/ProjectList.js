@@ -1,8 +1,9 @@
 import React from 'react';
 
 import ProjectPreview from "./ProjectPreview.js";
+import NewProject from "./NewProject.js";
 
-import ProjectApi from "../../Api/projects";
+import ProjectApi from "../../Api/projects.js";
 
 class ProjectList extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class ProjectList extends React.Component {
     componentWillMount() {
         ProjectApi.getProjects()
             .then(response => {
-                this.setState({projects: response});
+                this.setState({ projects: response });
             });
     }
 
@@ -39,16 +40,13 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        if(!this.state.projects){
-            return <div></div>
+        if (!this.state.projects) {
+            return <React.Fragment/>
         }
         return (
-            <div>
-                <h1 className="title">Projects</h1>
-                <div className="columns">
-                    {this.generateProjects()}
-                </div>
-            </div>
+            <React.Fragment>
+                {this.generateProjects()}
+            </React.Fragment>
         )
     }
 }

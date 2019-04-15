@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-import Home from "./Components/Home.js";
+import Home from "./Views/Home.js";
 import Project from "./Views/Project";
 
 import Test from "./Test";
@@ -16,8 +16,6 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Link to="/">Home</Link>
-                <Test/>
                 <div className="section hero is-dark is-fullheight">
                     <Switch>
                         <Route

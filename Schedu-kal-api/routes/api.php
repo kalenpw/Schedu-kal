@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/projects', 'ProjectController@getProjects');
+Route::post('/projects/create', 'ProjectController@createProject');
 Route::get('/projects/{id}', 'ProjectController@getProjectById');
 
 Route::post('/tasks/updateDescription', 'TaskController@updateTaskDescription');
@@ -39,31 +40,31 @@ Route::get('/projects/dummyData', function () {
     $task = new \App\Task();
     $task->dateDue = date('Y-m-d');
     $task->description = "Atttend all classes";
-    $task->project_id = "7";
+    $task->project_id = "2";
     $task->save();
 
     $task2 = new \App\Task();
     $task2->dateDue = date('Y-m-d');
     $task2->description = "Finish Monopoly";
-    $task2->project_id = "7";
+    $task2->project_id = "2";
     $task2->save();
 
     $task3 = new \app\task();
     $task3->datedue = date('y-m-d');
     $task3->description = "take finals";
-    $task3->project_id = "7";
+    $task3->project_id = "2";
     $task3->save();
 
     $task4 = new \app\task();
     $task4->datedue = date('y-m-d');
     $task4->description = "Learn redux";
-    $task4->project_id = "6";
+    $task4->project_id = "1";
     $task4->save();
 
     $task5 = new \app\task();
     $task5->datedue = date('y-m-d');
     $task5->description = "Learn native";
-    $task5->project_id = "6";
+    $task5->project_id = "1";
     $task5->save();
 });
 

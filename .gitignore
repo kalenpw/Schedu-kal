@@ -23,4 +23,15 @@ Schedu-kal-ui/npm-debug.log*
 Schedu-kal-ui/yarn-debug.log*
 Schedu-kal-ui/yarn-error.log*
 
-Schedu-kal-api/.*
+Schedu-kal-api/node_modules
+Schedu-kal-api/public/hot
+Schedu-kal-api/public/storage
+Schedu-kal-api/storage/*.key
+Schedu-kal-api/vendor
+Schedu-kal-api/.env
+Schedu-kal-api/.phpunit.result.cache
+Schedu-kal-api/Homestead.json
+Schedu-kal-api/Homestead.yaml
+Schedu-kal-api/npm-debug.log
+Schedu-kal-api/yarn-error.log
+
