@@ -7,6 +7,23 @@ use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
+    public function updateDateDue(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'dateDue' => 'required',
+        ]);
+        $projectToUpdate = \App\Project::where('id', $request->id)->first();
+        $dateDue = Carbon::createFromTimestampUTC(round($request->dateDue / 1000));
+        // return $dateDue;
+        // $formattedDate = $dateDue;
+        // $formattedDate = $dateDue->format("Y-m-d");
+        $projectToUpdate->dateDue = $dateDue;
+        $projectToUpdate->save();
+        return $projectToUpdate;
+    }
+
+
     public function createProject(Request $request)
     {
         $validated = $request->validate([
@@ -14,11 +31,10 @@ class ProjectController extends Controller
             'category' => 'required',
             'dateDue'=> 'required',
         ]);
-        $validated['dateDue'] = Carbon::createFromTimestampUTC(round($request->dateDue / 1000));
+        $validated['dateDue'] = Carbon::createFromTimestamp(round($request->dateDue / 1000));
         return \App\Project::create($validated);
     }
 
-    //
     public function getProjects()
     {
         $projects = \App\Project::all();

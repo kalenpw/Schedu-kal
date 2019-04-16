@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import ProjectApi from "../../Api/projects.js";
 import ProjectDate from "./ProjectDate.js";
 import DatePicker from "react-datepicker";
+import { localDateFromYMD } from "../../Utils/date-utils.js";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CardWrapper = styled.div`
@@ -45,11 +46,15 @@ class ProjectPreview extends React.Component {
 
     handleDateChange = (event) => {
         this.props.project.dateDue = event;
+        ProjectApi.updateProjectDateDue(this.props.project.id, event.getTime())
+            .then(response => console.log(response))
+            .catch(error => console.log(error));
         this.forceUpdate();
     }
 
     render() {
         const project = this.props.project;
+        const startDate = localDateFromYMD(project.dateDue);
         return (
             <CardWrapper className="card">
                 <header className="card-header">
@@ -58,7 +63,7 @@ class ProjectPreview extends React.Component {
                     </p>
                     <DatePicker
                         customInput={<ProjectDate date={project.dateDue} />}
-                        selected={this.state.startDate}
+                        selected={startDate}
                         onChange={this.handleDateChange}
                         popperPlacement="right-start"
                     />

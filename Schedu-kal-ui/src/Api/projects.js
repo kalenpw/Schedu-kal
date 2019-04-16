@@ -19,5 +19,14 @@ export default {
     getProjectById(id){
         return http.get('/projects/' + id)
             .then(response => response.data);
+    },
+
+    updateProjectDateDue(id, dateDue){
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('dateDue', dateDue);
+
+        return http.post('/projects/updateDateDue', formData)
+            .then(response => response.data);
     }
 }

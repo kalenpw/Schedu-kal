@@ -56,8 +56,8 @@ class CreateProject extends React.Component {
                 <form>
                     <h2 className="title has-text-grey-darker">New Project</h2>
                     <div className="field">
-                        <p class="control">
-                            <input class="input" type="text" placeholder="Title"
+                        <p className="control">
+                            <input className="input" type="text" placeholder="Title"
                                 onChange={(event) => this.handleTitleChange(event)}
                                 value={this.state.title}
                             />
@@ -65,8 +65,8 @@ class CreateProject extends React.Component {
                     </div>
 
                     <div className="field">
-                        <p class="control">
-                            <input class="input" type="text" placeholder="Category"
+                        <p className="control">
+                            <input className="input" type="text" placeholder="Category"
                                 onChange={(event) => this.handleCategoryChange(event)}
                                 value={this.state.category}
                             />
@@ -74,18 +74,18 @@ class CreateProject extends React.Component {
                     </div>
 
                     <div className="field">
-                        <p class="control">
+                        <div className="control">
                             <DatePicker
                                 withPortal
                                 customInput={<DateInput />}
                                 selected={this.state.selectedDate}
                                 onChange={this.handleDateChange} />
-                        </p>
+                        </div>
                     </div>
 
                     <div className="field">
-                        <p class="control">
-                            <button class="button is-primary"
+                        <p className="control">
+                            <button className="button is-primary"
                                 onClick={(event) => this.handleSubmit(event)}
                             >Create</button>
                         </p>

@@ -24,7 +24,6 @@ class NewProject extends React.Component {
     }
 
     createProject = () => {
-        console.log("Creating project");
         this.setState({ isModalVisible: true });
     }
 
