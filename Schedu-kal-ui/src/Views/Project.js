@@ -44,6 +44,14 @@ class Project extends React.Component {
     }
 
     deleteTask = (id) => {
+        if(this.taskInList(id, this.state.newTasks)){
+            const newTasks = this.state.newTasks;
+            const updatedTasks = newTasks.filter((task) => {
+                return id !== task.id;
+            });
+            this.setState({newTasks: updatedTasks});
+        }
+
         const deletedTasks = this.state.deletedTasks;
         const updatedTasks = update(deletedTasks, { $push: [id] });
         this.setState({ deletedTasks: updatedTasks });
@@ -68,7 +76,16 @@ class Project extends React.Component {
     editTask = (edittedTask) => {
         const taskId = edittedTask.id;
         const edittedTasks = this.state.edittedTasks;
-        if (this.taskInList(taskId, edittedTasks)) {
+        if (edittedTask.isNew) {
+            const newTasks = this.state.newTasks;
+            newTasks.map((task) => {
+                if (taskId === task.id) {
+                    task.description = edittedTask.description;
+                }
+                return task;
+            });
+        }
+        else if (this.taskInList(taskId, edittedTasks)) {
             edittedTasks.map((task) => {
                 if (taskId === task.id) {
                     task.description = edittedTask.description;
@@ -142,7 +159,7 @@ class Project extends React.Component {
 
     cancelChanges = () => {
         this.updateProjectFromDatabase();
-        this.setState({isEditting: false});
+        this.setState({ isEditting: false });
     }
 
     render() {
