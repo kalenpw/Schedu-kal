@@ -44,17 +44,18 @@ class Project extends React.Component {
     }
 
     deleteTask = (id) => {
-        if(this.taskInList(id, this.state.newTasks)){
+        if (this.taskInList(id, this.state.newTasks)) {
             const newTasks = this.state.newTasks;
             const updatedTasks = newTasks.filter((task) => {
                 return id !== task.id;
             });
-            this.setState({newTasks: updatedTasks});
+            this.setState({ newTasks: updatedTasks });
         }
-
-        const deletedTasks = this.state.deletedTasks;
-        const updatedTasks = update(deletedTasks, { $push: [id] });
-        this.setState({ deletedTasks: updatedTasks });
+        else {
+            const deletedTasks = this.state.deletedTasks;
+            const updatedTasks = update(deletedTasks, { $push: [id] });
+            this.setState({ deletedTasks: updatedTasks });
+        }
 
         const currentTasks = this.state.currentTasks;
         let updatedCurrentTasks = update(currentTasks, { $push: [] });

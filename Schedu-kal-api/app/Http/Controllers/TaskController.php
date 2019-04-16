@@ -41,6 +41,7 @@ class TaskController extends Controller
             'id' => 'required'
         ]);
         $task = \App\Task::where('id', $request->id)->first();
+        $task->delete();
         return "deleted";
     }
 }
