@@ -20,7 +20,11 @@ const CardWrapper = styled.div`
     .card-footer{
         margin-top: auto;
     }
-`
+`;
+
+const ProjectCategoryIcon = styled.span`
+    padding-right: 10px;
+`;
 
 class ProjectPreview extends React.Component {
     constructor(props) {
@@ -59,6 +63,9 @@ class ProjectPreview extends React.Component {
             <CardWrapper className="card">
                 <header className="card-header">
                     <p className="card-header-title">
+                        <ProjectCategoryIcon>
+                            <i class="fas fa-school"></i>
+                        </ProjectCategoryIcon>
                         {project.name}
                     </p>
                     <DatePicker

@@ -24,10 +24,12 @@ class NewProject extends React.Component {
     }
 
     createProject = () => {
+        document.title = "New Project";
         this.setState({ isModalVisible: true });
     }
 
     closeModal = () => {
+        document.title = "Schedu-kal";
         this.setState({ isModalVisible: false });
     }
 

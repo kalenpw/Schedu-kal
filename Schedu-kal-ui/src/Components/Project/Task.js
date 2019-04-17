@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { } from 'bulma-checkradio';
 
 const Delete = styled.span`
     margin-right: 5px;
@@ -17,6 +18,10 @@ class Task extends React.Component {
     handleChange = (event) => {
         this.props.task.description = event.target.value;
         this.props.editTask(this.props.task);
+    }
+
+    handleCompleteTaskClick = () => {
+        this.props.completeTask(this.props.task);
     }
 
     generateTask() {
@@ -37,10 +42,20 @@ class Task extends React.Component {
             )
         }
         else {
+            const isCompleted = this.props.task.completed;
+            const completedClass = isCompleted ? "checked" : "";
+            const strikeThrough = {
+                textDecoration: (isCompleted ? 'line-through' : '')
+            };
             return (
-                <p className="">
-                    {this.props.task.description}
-                </p>
+                <div className="field"
+                    onClick={(event) => this.handleCompleteTaskClick(event)} 
+                >
+                    <input className="is-checkradio" type="checkbox" checked={completedClass} 
+                        onChange={() => this.handleCompleteTaskClick()} 
+                    />
+                    <label style={strikeThrough}>{this.props.task.description}</label>
+                </div>
             )
         }
     }

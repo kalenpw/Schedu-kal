@@ -19,6 +19,7 @@ class TaskList extends React.Component {
                     editTask={this.props.editTask}
                     deleteTask={this.props.deleteTask}
                     isEditting={this.props.isEditting}
+                    completeTask={this.props.completeTask}
                 ></Task>
             )
         });

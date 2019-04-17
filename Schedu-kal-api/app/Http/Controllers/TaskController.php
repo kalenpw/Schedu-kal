@@ -7,8 +7,18 @@ use Carbon\Carbon;
 
 class TaskController extends Controller
 {
-    //
-    public function updateTaskDescription(Request $request)
+    public function completeTask(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required'
+        ]);
+        $task = \App\Task::where('id', $request->id)->first();
+        $task->completed = !$task->completed;
+        $task->save();
+        return $task;
+    }
+
+    public function updateDescription(Request $request)
     {
         $validatedData = $request->validate([
             'id' => 'required',

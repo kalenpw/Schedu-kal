@@ -25,7 +25,7 @@ class Project extends React.Component {
             deletedTasks: [
 
             ],
-            isEditting: true,
+            isEditting: false,
         };
     }
 
@@ -39,7 +39,9 @@ class Project extends React.Component {
             .then(response => {
                 this.setState({ projectId: response.id });
                 this.setState({ currentTasks: response.tasks });
-                this.setState({ project: response });
+                this.setState({ project: response }, () => {
+                    document.title = this.state.project.name;
+                });
             });
     }
 
@@ -98,6 +100,13 @@ class Project extends React.Component {
             edittedTasks.push(edittedTask);
             this.setState({ edittedTasks: edittedTasks });
         }
+    }
+
+    completeTask = (task) => {
+        TaskApi.completeTask(task.id)
+            .then(response => {
+                this.updateProjectFromDatabase();
+            })  
     }
 
     saveEdits = () => {
@@ -194,6 +203,7 @@ class Project extends React.Component {
                     editTask={this.editTask}
                     deleteTask={this.deleteTask}
                     isEditting={this.state.isEditting}
+                    completeTask={this.completeTask}
                 />
             </div>
         )
