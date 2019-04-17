@@ -2,9 +2,10 @@ import React from 'react';
 import ProjectApi from "../../../Api/projects.js";
 import DatePicker from "react-datepicker";
 import styled from "styled-components";
+import { ThemeContext } from "../../../Utils/theme-context.js";
 
 const ColoredBox = styled.div`
-    background-color: #222 !important;
+    background-color: ${props => props.theme.background} !important;
 `;
 
 class DateInput extends React.Component {
@@ -56,7 +57,7 @@ class CreateProject extends React.Component {
 
     render() {
         return (
-            <ColoredBox className="box">
+            <ColoredBox theme={this.context.theme} className="box">
                 <form>
                     <h2 className="title">New Project</h2>
                     <div className="field">
@@ -99,5 +100,7 @@ class CreateProject extends React.Component {
         )
     }
 }
+
+CreateProject.contextType = ThemeContext;
 
 export default CreateProject;

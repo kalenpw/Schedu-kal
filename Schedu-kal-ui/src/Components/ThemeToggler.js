@@ -5,12 +5,12 @@ class ThemeToggler extends React.Component {
     generateButton = (theme, toggleTheme) => {
         const fontAwesomeIcon = (theme.name === "dark") ? 'far fa-sun' : 'far fa-moon';
         return (
-            <span
+            <div
                 className="is-primary is-outlined"
                 onClick={toggleTheme}
             >
                 <i className={fontAwesomeIcon}></i>
-            </span>
+            </div>
         )
     }
 

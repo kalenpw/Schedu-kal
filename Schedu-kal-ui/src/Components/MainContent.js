@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Route, Switch } from "react-router-dom";
-import ThemeToggler from "./ThemeToggler";
 import { ThemeContext } from "../Utils/theme-context.js";
+import Navbar from "./Navbar.js";
 
 import Home from "../Views/Home.js";
 import Project from "../Views/Project";
@@ -18,17 +18,7 @@ class AppRoot extends React.Component {
         return (
             <div className={themeClasses}>
                 <div className="hero-head">
-                    <nav className="navbar" role="navigation" aria-label="main navigation">
-                        <div className="navbar-brand">
-                            <ThemeToggler />
-
-                            <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
-                                <span aria-hidden="true"></span>
-                                <span aria-hidden="true"></span>
-                                <span aria-hidden="true"></span>
-                            </a>
-                        </div>
-                    </nav>
+                    <Navbar/>
                     <div className="section">
                         <Switch>
                             <Route

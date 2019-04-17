@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeContext, themes } from "./Utils/theme-context.js";
 import MainContent from "./Components/MainContent.js";
 
@@ -12,20 +12,31 @@ class App extends Component {
                     state.theme === themes.dark
                         ? themes.light
                         : themes.dark,
-            }));
+            }), () => {
+                localStorage.setItem("theme", this.state.theme.name);
+            });
         };
 
-        this.state = {
-            theme: themes.light,
-            toggleTheme: this.toggleTheme,
-        };
+        const theme = localStorage.getItem("theme");
+        if (theme === "light") {
+            this.state = {
+                theme: themes.light,
+                toggleTheme: this.toggleTheme,
+            };
+        }
+        else {
+            this.state = {
+                theme: themes.dark,
+                toggleTheme: this.toggleTheme,
+            };
+        }
     }
 
     render() {
         return (
             <Router>
                 <ThemeContext.Provider value={this.state}>
-                    <MainContent/>
+                    <MainContent />
                 </ThemeContext.Provider>
             </Router>
         );
