@@ -1,16 +1,20 @@
 import React from 'react';
 import ProjectApi from "../../../Api/projects.js";
 import DatePicker from "react-datepicker";
+import styled from "styled-components";
+
+const ColoredBox = styled.div`
+    background-color: #222 !important;
+`;
 
 class DateInput extends React.Component {
     handleClick = (event) => {
-        console.log("clicked button");
     }
 
     render() {
         return (
             <p
-                className="button is-dark is-outlined"
+                className="button is-light is-outlined"
                 onClick={this.props.onClick}>
                 {this.props.value}
             </p>
@@ -52,9 +56,9 @@ class CreateProject extends React.Component {
 
     render() {
         return (
-            <div className="box">
+            <ColoredBox className="box">
                 <form>
-                    <h2 className="title has-text-grey-darker">New Project</h2>
+                    <h2 className="title">New Project</h2>
                     <div className="field">
                         <p className="control">
                             <input className="input" type="text" placeholder="Title"
@@ -91,7 +95,7 @@ class CreateProject extends React.Component {
                         </p>
                     </div>
                 </form>
-            </div>
+            </ColoredBox>
         )
     }
 }

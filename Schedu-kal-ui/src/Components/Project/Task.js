@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ThemeContext } from "../../Utils/theme-context.js";
 import { } from 'bulma-checkradio';
 
 const Delete = styled.span`
@@ -68,5 +69,7 @@ class Task extends React.Component {
         )
     }
 }
+
+Task.contextType = ThemeContext;
 
 export default Task;

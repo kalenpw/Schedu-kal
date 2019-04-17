@@ -25,7 +25,7 @@ class ProjectList extends React.Component {
     generateProjects() {
         let projectEles = this.state.projects.map((project) => {
             return (
-                <div key={project.id} className="column">
+                <div key={project.id} className="column is-half-tablet is-one-quarter-desktop">
                     <ProjectPreview
                         updateProjectDateDue={this.updateProjectDateDue}
                         project={project}

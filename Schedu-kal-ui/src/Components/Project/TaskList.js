@@ -2,7 +2,6 @@ import React from 'react';
 
 import Task from "./Task.js";
 import NewTask from "./NewTask";
-
 import styled from 'styled-components';
 
 const TasksList = styled.ul`

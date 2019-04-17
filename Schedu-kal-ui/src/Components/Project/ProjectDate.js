@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getDaysDifference, formatDate } from "../../Utils/date-utils";
+import {ThemeContext} from "../../Utils/theme-context.js";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DateDisplay = styled.p`
     padding-top: 5px;
     padding-right: 10px;
+    color: ${props => props.theme.fontColor}
 `
 
 class ProjectDate extends React.Component {
@@ -31,6 +33,7 @@ class ProjectDate extends React.Component {
             <React.Fragment>
                 <DateDisplay onClick={this.props.onClick}
                     className="example-custom-input"
+                    theme={this.context.theme}
                 >
                     {dateInfo.formattedDate}
                     <br/>
@@ -40,5 +43,5 @@ class ProjectDate extends React.Component {
         )
     }
 }
-
+ProjectDate.contextType = ThemeContext;
 export default ProjectDate;

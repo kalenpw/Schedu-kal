@@ -7,8 +7,10 @@ class Home extends React.Component {
         return (
             <div className='hero-head'>
                 <h1 className="title">Projects</h1>
-                <div className="columns">
+                <div className="column">
                     <NewProject className="column" />
+                </div>
+                <div className="columns is-multiline">
                     <ProjectList></ProjectList>
                 </div>
             </div>

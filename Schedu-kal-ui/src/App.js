@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
-import Home from "./Views/Home.js";
-import Project from "./Views/Project";
-
-function Error(props) {
-    return (
-        <h1>does not exist</h1>
-    )
-}
+import { BrowserRouter as Router} from "react-router-dom";
+import { ThemeContext, themes } from "./Utils/theme-context.js";
+import MainContent from "./Components/MainContent.js";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleTheme = () => {
+            this.setState(state => ({
+                theme:
+                    state.theme === themes.dark
+                        ? themes.light
+                        : themes.dark,
+            }));
+        };
+
+        this.state = {
+            theme: themes.light,
+            toggleTheme: this.toggleTheme,
+        };
+    }
+
     render() {
         return (
             <Router>
-                <div className="section hero is-dark is-fullheight">
-                    <Switch>
-                        <Route
-                            exact
-                            path="/"
-                            component={Home}
-                        />
-                        <Route
-                            path="/projects/:id"
-                            component={Project}
-                        />
-                        <Route component={Error} />
-                    </Switch>
-                </div>
+                <ThemeContext.Provider value={this.state}>
+                    <MainContent/>
+                </ThemeContext.Provider>
             </Router>
         );
     }
 }
+
+App.contextType = ThemeContext;
 
 export default App;

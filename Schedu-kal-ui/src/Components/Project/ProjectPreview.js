@@ -5,20 +5,26 @@ import ProjectApi from "../../Api/projects.js";
 import ProjectDate from "./ProjectDate.js";
 import DatePicker from "react-datepicker";
 import { localDateFromYMD } from "../../Utils/date-utils.js";
+import { ThemeContext } from "../../Utils/theme-context.js";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CardWrapper = styled.div`
-    background-color: #222;
+    background-color: ${props => props.theme.cardBackground}
     border-radius: 5px;
     color: #ddd;
     display: flex;
     flex-direction: column;
     height: 100%;    
     .card-header-title{
-        color: #ddd;
+        color: ${props => props.theme.fontColor}
     }
     .card-footer{
         margin-top: auto;
+        color: ${props => props.theme.fontColor}
+    }
+
+    li{
+        color: ${props => props.theme.fontColor}
     }
 `;
 
@@ -60,11 +66,11 @@ class ProjectPreview extends React.Component {
         const project = this.props.project;
         const startDate = localDateFromYMD(project.dateDue);
         return (
-            <CardWrapper className="card">
+            <CardWrapper theme={this.context.theme} className="card">
                 <header className="card-header">
                     <p className="card-header-title">
                         <ProjectCategoryIcon>
-                            <i class="fas fa-school"></i>
+                            <i className="fas fa-school"></i>
                         </ProjectCategoryIcon>
                         {project.name}
                     </p>
@@ -90,5 +96,7 @@ class ProjectPreview extends React.Component {
         )
     }
 }
+
+ProjectPreview.contextType = ThemeContext;
 
 export default ProjectPreview;
