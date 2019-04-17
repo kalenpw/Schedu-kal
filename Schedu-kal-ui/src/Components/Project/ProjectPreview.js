@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ProjectApi from "../../Api/projects.js";
 import ProjectDate from "./ProjectDate.js";
 import DatePicker from "react-datepicker";
+import { getIconFromCategory } from "../../Utils/project-utils.js";
 import { localDateFromYMD } from "../../Utils/date-utils.js";
 import { ThemeContext } from "../../Utils/theme-context.js";
 import "react-datepicker/dist/react-datepicker.css";
@@ -30,6 +31,7 @@ const CardWrapper = styled.div`
 
 const ProjectCategoryIcon = styled.span`
     padding-right: 10px;
+    cursor: pointer;
 `;
 
 class ProjectPreview extends React.Component {
@@ -62,15 +64,23 @@ class ProjectPreview extends React.Component {
         this.forceUpdate();
     }
 
+    updateCategory = (event) => {
+        event.preventDefault();
+        console.log(console.log(this.props.project.category));
+    }
+
     render() {
         const project = this.props.project;
         const startDate = localDateFromYMD(project.dateDue);
+        const categoryIcon = getIconFromCategory(project.category);
         return (
             <CardWrapper theme={this.context.theme} className="card">
                 <header className="card-header">
                     <p className="card-header-title">
-                        <ProjectCategoryIcon>
-                            <i className="fas fa-school"></i>
+                        <ProjectCategoryIcon
+                            onClick={this.updateCategory}
+                        >
+                            <i className={categoryIcon}></i>
                         </ProjectCategoryIcon>
                         {project.name}
                     </p>

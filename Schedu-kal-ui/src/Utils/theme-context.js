@@ -6,12 +6,14 @@ export const themes = {
         heroClass: "is-white",
         cardBackground: '#eee',
         fontColor: '#222',
+        formBackground: '#fff',
     },
     dark: {
         name: "dark",
         heroClass: 'is-dark',
         cardBackground: '#222',
         fontColor: '#ddd',
+        formBackground: '#222',
     }
 };
 export const ThemeContext = React.createContext({

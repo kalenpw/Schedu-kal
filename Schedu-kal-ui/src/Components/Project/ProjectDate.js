@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const DateDisplay = styled.p`
     padding-top: 5px;
     padding-right: 10px;
+    cursor: pointer;
     color: ${props => props.theme.fontColor}
 `
 

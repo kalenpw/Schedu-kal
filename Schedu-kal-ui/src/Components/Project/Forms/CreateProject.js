@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../../../Utils/theme-context.js";
 
 const ColoredBox = styled.div`
-    background-color: ${props => props.theme.background} !important;
+    background-color: ${props => props.theme.formBackground} !important;
 `;
 
 class DateInput extends React.Component {
@@ -13,9 +13,12 @@ class DateInput extends React.Component {
     }
 
     render() {
+        let isDark = (this.context.theme.name === "dark");
+        let buttonTheme = isDark ? 'is-light' : 'is-dark';
+        let buttonClasses = buttonTheme + " button is-outlined";
         return (
             <p
-                className="button is-light is-outlined"
+                className={buttonClasses}
                 onClick={this.props.onClick}>
                 {this.props.value}
             </p>
@@ -102,5 +105,6 @@ class CreateProject extends React.Component {
 }
 
 CreateProject.contextType = ThemeContext;
+DateInput.contextType = ThemeContext;
 
 export default CreateProject;
