@@ -21,6 +21,15 @@ export default {
             .then(response => response.data);
     },
 
+    updateName(id, name){
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('name', name);
+
+        return http.post('/projects/updateName', formData)
+            .then(response => response.data);
+    },
+
     updateProjectDateDue(id, dateDue){
         let formData = new FormData();
         formData.append('id', id);

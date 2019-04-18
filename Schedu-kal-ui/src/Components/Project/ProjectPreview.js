@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ProjectApi from "../../Api/projects.js";
 import ProjectDate from "./ProjectDate.js";
 import DatePicker from "react-datepicker";
+import ThemedInput from "./Forms/ThemedInput.js";
 import { getIconFromCategory } from "../../Utils/project-utils.js";
 import { localDateFromYMD } from "../../Utils/date-utils.js";
 import { ThemeContext } from "../../Utils/theme-context.js";
@@ -40,6 +41,7 @@ class ProjectPreview extends React.Component {
         this.state = {
             startDate: null,
             showDate: false,
+            isEditting: false
         }
     }
 
@@ -64,9 +66,50 @@ class ProjectPreview extends React.Component {
         this.forceUpdate();
     }
 
+    handleKeyUp = (event) => {
+        if (event.key === "Enter") {
+            ProjectApi.updateName(this.props.project.id, this.props.project.name)
+                .then(response => console.log(response))
+                .catch(error => console.log(error));
+        }
+    }
+
+    handleNameChange = (event) => {
+        this.props.project.name = event.target.value;
+        this.forceUpdate();
+    }
+
     updateCategory = (event) => {
         event.preventDefault();
         console.log(console.log(this.props.project.category));
+    }
+
+    editTitle = (event) => {
+        const isEditting = this.state.isEditting;
+        if (isEditting) {
+
+        }
+        else {
+            this.setState({ isEditting: !this.state.isEditting });
+        }
+    }
+
+    generateTitleDisplay() {
+        const isEditting = this.state.isEditting;
+        const project = this.props.project;
+        const baseClasses = "input is-primary is-small is-size-";
+        const allClasses = isEditting ? baseClasses : 'is-static ' + baseClasses;
+        return (
+            <React.Fragment>
+                <ThemedInput
+                    inputClasses="input is-primary is-small"
+                    placeholder="placeholder"
+                    value={project.name}
+                    handleChange={this.handleNameChange}
+                    handleKeyUp={this.handleKeyUp}
+                />
+            </React.Fragment>
+        )
     }
 
     render() {
@@ -76,14 +119,18 @@ class ProjectPreview extends React.Component {
         return (
             <CardWrapper theme={this.context.theme} className="card">
                 <header className="card-header">
-                    <p className="card-header-title">
+                    <div className="card-header-title">
                         <ProjectCategoryIcon
                             onClick={this.updateCategory}
                         >
                             <i className={categoryIcon}></i>
                         </ProjectCategoryIcon>
-                        {project.name}
-                    </p>
+                        <span
+                            onClick={this.editTitle}
+                        >
+                            {this.generateTitleDisplay()}
+                        </span>
+                    </div>
                     <DatePicker
                         customInput={<ProjectDate date={project.dateDue} />}
                         selected={startDate}

@@ -65,7 +65,7 @@ class CreateProject extends React.Component {
                     <h2 className="title">New Project</h2>
                     <div className="field">
                         <p className="control">
-                            <input className="input" type="text" placeholder="Title"
+                            <input className="input is-primary" type="text" placeholder="Title"
                                 onChange={(event) => this.handleTitleChange(event)}
                                 value={this.state.title}
                             />
@@ -74,7 +74,7 @@ class CreateProject extends React.Component {
 
                     <div className="field">
                         <p className="control">
-                            <input className="input" type="text" placeholder="Category"
+                            <input className="input is-primary" type="text" placeholder="Category"
                                 onChange={(event) => this.handleCategoryChange(event)}
                                 value={this.state.category}
                             />

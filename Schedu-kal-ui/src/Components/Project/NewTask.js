@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ThemeContext } from "../../Utils/theme-context.js";
 
 const Input = styled.input`
-    background-color: #444;
-    color: #ddd;
-    border: 2px solid red;
+    background-color: ${props => props.theme.formBackground}
+    color: ${props => props.theme.fontColor}
     &::placeholder {
         color: rgba(150, 150, 150, .8);
     }
@@ -34,6 +34,7 @@ class NewTask extends React.Component {
             <div className="field">
                 <div className="control has-icons-left">
                     <Input
+                        theme={this.context.theme}
                         className="input is-primary"
                         placeholder="New task"
                         ref={this.newTaskText}
@@ -47,5 +48,6 @@ class NewTask extends React.Component {
         )
     }
 }
+NewTask.contextType = ThemeContext;
 
 export default NewTask;

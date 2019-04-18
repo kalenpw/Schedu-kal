@@ -3,6 +3,10 @@ import ProjectList from "../Components/Project/ProjectList.js";
 import NewProject from "../Components/Project/NewProject.js";
 
 class Home extends React.Component {
+    componentWillMount(){
+        document.title = "Schedu-kal";
+    }
+
     render() {
         return (
             <div className='hero-head'>

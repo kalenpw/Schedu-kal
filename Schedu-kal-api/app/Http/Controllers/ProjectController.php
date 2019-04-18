@@ -7,6 +7,21 @@ use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
+    public function updateName(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+        ]);
+        $task = \App\Project::where('id', $request->id)->first();
+        if ($task) {
+            $task->name = $request->name;
+            $task->save();
+            return $task;
+        }
+        return "not found";
+    }
+
     public function updateDateDue(Request $request)
     {
         $validated = $request->validate([
@@ -22,7 +37,6 @@ class ProjectController extends Controller
         $projectToUpdate->save();
         return $projectToUpdate;
     }
-
 
     public function createProject(Request $request)
     {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Route, Switch } from "react-router-dom";
+import {  Route, Switch} from "react-router-dom";
 import { ThemeContext } from "../Utils/theme-context.js";
 import Navbar from "./Navbar.js";
 
