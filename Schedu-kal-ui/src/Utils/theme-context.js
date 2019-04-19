@@ -7,6 +7,7 @@ export const themes = {
         cardBackground: '#eee',
         fontColor: '#222',
         formBackground: '#fff',
+        inputBackground: '#fff',
     },
     dark: {
         name: "dark",
@@ -14,6 +15,7 @@ export const themes = {
         cardBackground: '#222',
         fontColor: '#ddd',
         formBackground: '#222',
+        inputBackground: '#2f2f2f',
     }
 };
 export const ThemeContext = React.createContext({

@@ -79,34 +79,33 @@ class ProjectPreview extends React.Component {
         this.forceUpdate();
     }
 
+    handleBlur = () => {
+        this.setState({isEditting: false});
+    }
+
     updateCategory = (event) => {
         event.preventDefault();
         console.log(console.log(this.props.project.category));
     }
 
     editTitle = (event) => {
-        const isEditting = this.state.isEditting;
-        if (isEditting) {
-
-        }
-        else {
-            this.setState({ isEditting: !this.state.isEditting });
-        }
+        this.setState({isEditting: true});
     }
 
     generateTitleDisplay() {
         const isEditting = this.state.isEditting;
         const project = this.props.project;
-        const baseClasses = "input is-primary is-small is-size-";
+        const baseClasses = "input is-primary is-small";
         const allClasses = isEditting ? baseClasses : 'is-static ' + baseClasses;
         return (
             <React.Fragment>
                 <ThemedInput
-                    inputClasses="input is-primary is-small"
-                    placeholder="placeholder"
+                    inputClasses={allClasses}
+                    placeholder="Enter a title"
                     value={project.name}
                     handleChange={this.handleNameChange}
                     handleKeyUp={this.handleKeyUp}
+                    handleBlur={this.handleBlur}
                 />
             </React.Fragment>
         )

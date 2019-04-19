@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ThemeContext } from "../../../Utils/theme-context.js";
 
 const Input = styled.input`
-    background-color: ${props => props.theme.formBackground}
+    background-color: ${props => props.theme.inputBackground}
     color: ${props => props.theme.fontColor}
     &::placeholder {
         color: rgba(150, 150, 150, .8);
@@ -17,7 +17,9 @@ class ThemedInput extends React.Component {
     }
 
     handleKeyUp = (event) => {
-        this.props.handleKeyUp(event);
+        if (this.props.handleKeyUp) {
+            this.props.handleKeyUp(event, this.ref);
+        }
     }
 
     render() {
@@ -36,6 +38,7 @@ class ThemedInput extends React.Component {
                         onChange={this.props.handleChange}
                         ref={this.ref}
                         onKeyUp={(event) => this.handleKeyUp(event)}
+                        onBlur={this.props.handleBlur}
                     />
                     {
                         icon &&

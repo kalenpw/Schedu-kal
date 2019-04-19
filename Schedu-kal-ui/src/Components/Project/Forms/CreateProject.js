@@ -3,6 +3,7 @@ import ProjectApi from "../../../Api/projects.js";
 import DatePicker from "react-datepicker";
 import styled from "styled-components";
 import { ThemeContext } from "../../../Utils/theme-context.js";
+import ThemedInput from "./ThemedInput.js";
 
 const ColoredBox = styled.div`
     background-color: ${props => props.theme.formBackground} !important;
@@ -64,21 +65,25 @@ class CreateProject extends React.Component {
                 <form>
                     <h2 className="title">New Project</h2>
                     <div className="field">
-                        <p className="control">
-                            <input className="input is-primary" type="text" placeholder="Title"
-                                onChange={(event) => this.handleTitleChange(event)}
-                                value={this.state.title}
+                        <div className="control">
+                            <ThemedInput
+                                inputClasses="input is-primary" 
+                                handleChange={this.handleTitleChange}
+                                placeholder="Title"
+                                handleKeyUp={null}
                             />
-                        </p>
+                        </div>
                     </div>
 
                     <div className="field">
-                        <p className="control">
-                            <input className="input is-primary" type="text" placeholder="Category"
-                                onChange={(event) => this.handleCategoryChange(event)}
-                                value={this.state.category}
+                        <div className="control">
+                            <ThemedInput
+                                inputClasses="input is-primary" 
+                                handleChange={this.handleCategoryChange}
+                                placeholder="Category"
+                                handleKeyUp={null}
                             />
-                        </p>
+                        </div>
                     </div>
 
                     <div className="field">

@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Task from "./Task.js";
-import NewTask from "./NewTask";
 import styled from 'styled-components';
+import ThemedInput from "./Forms/ThemedInput.js";
 
 const TasksList = styled.ul`
     li{
@@ -25,6 +25,19 @@ class TaskList extends React.Component {
         return tasks;
     }
 
+    handleKeyUp = (event, ref) => {
+        if (event.key === "Enter" && event.target.value.trim()) {
+            const task = {
+                projectId: this.props.projectId,
+                isNew: true,
+                description: event.target.value.trim(),
+                id: Math.random(),
+            }
+            this.props.addTask(task);
+            ref.current.value = "";
+        }
+    }
+
     render() {
         const isEditting = this.props.isEditting;
         // console.log(this.props.tasks);
@@ -33,10 +46,12 @@ class TaskList extends React.Component {
                 {this.generateTasks()}
                 {
                     isEditting &&
-                    <NewTask
-                        projectId={this.props.projectId}
-                        addTask={this.props.addTask}
-                    ></NewTask>
+                    <ThemedInput
+                        inputClasses="input is-primary"
+                        icon="fas fa-envelope"
+                        placeholder="New task"
+                        handleKeyUp={this.handleKeyUp}
+                    />                    
                 }
             </TasksList>
         )
