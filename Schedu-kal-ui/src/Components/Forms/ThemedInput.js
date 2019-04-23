@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from "../../../Utils/theme-context.js";
+import { ThemeContext } from "Utils/theme-context.js";
 
 const Input = styled.input`
     background-color: ${props => props.theme.inputBackground}

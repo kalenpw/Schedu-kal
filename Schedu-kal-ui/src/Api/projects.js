@@ -1,4 +1,4 @@
-import http from "./axios";
+import http from "Api/axios.js";
 
 export default {
     createProject(title, category, dateDue){

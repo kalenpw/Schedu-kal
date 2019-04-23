@@ -1,10 +1,9 @@
 import React from 'react';
 import {  Route, Switch} from "react-router-dom";
-import { ThemeContext } from "../Utils/theme-context.js";
-import Navbar from "./Navbar.js";
-
-import Home from "../Views/Home.js";
-import Project from "../Views/Project";
+import { ThemeContext } from "Utils/theme-context.js";
+import Navbar from "Components/Navbar.js";
+import Home from "Views/Home.js";
+import Project from "Views/Project";
 
 function Error(props) {
     return (

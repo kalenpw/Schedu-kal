@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from "../../Utils/theme-context.js";
 import { } from 'bulma-checkradio';
+import { ThemeContext } from "Utils/theme-context.js";
 
 const Delete = styled.span`
     margin-right: 5px;

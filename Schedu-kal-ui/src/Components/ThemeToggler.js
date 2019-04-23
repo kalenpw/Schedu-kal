@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeContext } from "../Utils/theme-context";
+import { ThemeContext } from "Utils/theme-context";
 
 class ThemeToggler extends React.Component {
     generateButton = (theme, toggleTheme) => {

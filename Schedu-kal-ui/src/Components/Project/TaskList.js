@@ -1,8 +1,7 @@
 import React from 'react';
-
-import Task from "./Task.js";
 import styled from 'styled-components';
-import ThemedInput from "./Forms/ThemedInput.js";
+import Task from "Components/Project/Task.js";
+import ThemedInput from "Components/Forms/ThemedInput.js";
 
 const TasksList = styled.ul`
     li{

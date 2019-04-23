@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ProjectApi from "../../Api/projects.js";
-import ProjectDate from "./ProjectDate.js";
 import DatePicker from "react-datepicker";
-import ThemedInput from "./Forms/ThemedInput.js";
-import { getIconFromCategory } from "../../Utils/project-utils.js";
-import { localDateFromYMD } from "../../Utils/date-utils.js";
-import { ThemeContext } from "../../Utils/theme-context.js";
 import "react-datepicker/dist/react-datepicker.css";
+import ProjectApi from "Api/projects.js";
+import ProjectDate from "Components/Project/ProjectDate.js";
+import ThemedInput from "Components/Forms/ThemedInput.js";
+import { getIconFromCategory } from "Utils/project-utils.js";
+import { localDateFromYMD } from "Utils/date-utils.js";
+import { ThemeContext } from "Utils/theme-context.js";
 
 const CardWrapper = styled.div`
     background-color: ${props => props.theme.cardBackground}

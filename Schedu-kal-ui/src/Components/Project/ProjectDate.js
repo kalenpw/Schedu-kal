@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getDaysDifference, formatDate } from "../../Utils/date-utils";
-import {ThemeContext} from "../../Utils/theme-context.js";
 import "react-datepicker/dist/react-datepicker.css";
+import { getDaysDifference, formatDate } from "Utils/date-utils.js";
+import {ThemeContext} from "Utils/theme-context.js";
 
 const DateDisplay = styled.p`
     padding-top: 5px;

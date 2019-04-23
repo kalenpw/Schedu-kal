@@ -1,11 +1,9 @@
 import React from 'react';
-
-import TaskList from "../Components/Project/TaskList";
-
-import ProjectApi from "../Api/projects";
-import TaskApi from "../Api/tasks";
-
 import update from 'immutability-helper';
+import TaskList from "Components/Project/TaskList.js";
+import ProjectApi from "Api/projects";
+import TaskApi from "Api/tasks";
+
 
 class Project extends React.Component {
     constructor(props) {

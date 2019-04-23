@@ -1,6 +1,6 @@
 import React from 'react';
-import ThemeToggler from "./ThemeToggler.js";
 import { Link } from "react-router-dom";
+import ThemeToggler from "Components/ThemeToggler.js";
 
 class Navbar extends React.Component {
     render() {

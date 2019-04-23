@@ -1,9 +1,9 @@
 import React from 'react';
-import ProjectApi from "../../../Api/projects.js";
 import DatePicker from "react-datepicker";
 import styled from "styled-components";
-import { ThemeContext } from "../../../Utils/theme-context.js";
-import ThemedInput from "./ThemedInput.js";
+import ProjectApi from "Api/projects.js";
+import { ThemeContext } from "Utils/theme-context.js";
+import ThemedInput from "Components/Forms/ThemedInput.js";
 
 const ColoredBox = styled.div`
     background-color: ${props => props.theme.formBackground} !important;

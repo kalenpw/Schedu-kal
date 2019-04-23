@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeContext, themes } from "./Utils/theme-context.js";
-import MainContent from "./Components/MainContent.js";
+import { ThemeContext, themes } from "Utils/theme-context.js";
+import MainContent from "Components/MainContent.js";
 
 class App extends Component {
     constructor(props) {

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import "./Forms/CreateProject.js";
-import CreateProject from './Forms/CreateProject.js';
-import { ThemeContext } from "../../Utils/theme-context.js";
+import CreateProject from "Components/Forms/CreateProject.js";
+import { ThemeContext } from "Utils/theme-context.js";
 
 const CardWrapper = styled.div`
     cursor: pointer;

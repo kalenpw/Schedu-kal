@@ -1,6 +1,6 @@
 import React from 'react';
-import ProjectPreview from "./ProjectPreview.js";
-import ProjectApi from "../../Api/projects.js";
+import ProjectPreview from "Components/Project/ProjectPreview.js";
+import ProjectApi from "Api/projects.js";
 
 class ProjectList extends React.Component {
     constructor(props) {

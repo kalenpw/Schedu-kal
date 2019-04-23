@@ -1,6 +1,6 @@
 import React from 'react';
-import ProjectList from "../Components/Project/ProjectList.js";
-import NewProject from "../Components/Project/NewProject.js";
+import ProjectList from "Components/Project/ProjectList.js";
+import NewProject from "Components/Project/NewProject.js";
 
 class Home extends React.Component {
     componentWillMount() {
