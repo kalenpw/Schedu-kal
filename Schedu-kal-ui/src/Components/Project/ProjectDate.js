@@ -8,6 +8,7 @@ const DateDisplay = styled.p`
     padding-top: 5px;
     padding-right: 10px;
     cursor: pointer;
+    font-size: .81rem;
     color: ${props => props.theme.fontColor}
 `
 

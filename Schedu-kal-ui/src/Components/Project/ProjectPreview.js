@@ -92,6 +92,10 @@ class ProjectPreview extends React.Component {
         this.setState({isEditting: true});
     }
 
+    handleDragStart = (event, projectId) =>{
+        this.props.handleDragStart(event, projectId);
+    }
+
     generateTitleDisplay() {
         const isEditting = this.state.isEditting;
         const project = this.props.project;
@@ -116,7 +120,13 @@ class ProjectPreview extends React.Component {
         const startDate = localDateFromYMD(project.dateDue);
         const categoryIcon = getIconFromCategory(project.category);
         return (
-            <CardWrapper theme={this.context.theme} className="card">
+            <CardWrapper 
+                theme={this.context.theme} 
+                className="card"
+                draggable="true"
+                onDragStart={(event) => this.handleDragStart(event, this.props.project.id)}
+                onDragEnd={this.props.handleDragEnd}
+            >
                 <header className="card-header">
                     <div className="card-header-title">
                         <ProjectCategoryIcon
