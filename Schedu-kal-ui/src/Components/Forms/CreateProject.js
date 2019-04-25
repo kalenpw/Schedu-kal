@@ -12,7 +12,7 @@ const ColoredBox = styled.div`
 `;
 
 class DateInput extends React.Component {
-
+    
     render() {
         let isDark = (this.context.theme.name === "dark");
         let buttonTheme = isDark ? 'is-light' : 'is-dark';

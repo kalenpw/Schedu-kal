@@ -49,9 +49,10 @@ export function createProjectBegin() {
     }
 }
 
-export function createProjectSuccess() {
+export function createProjectSuccess(createdProject) {
     return {
-        type: CREATE_PROJECT_SUCCESS
+        type: CREATE_PROJECT_SUCCESS,
+        payload: createdProject
     }
 }
 
@@ -63,11 +64,17 @@ export function createProjectFailure(error) {
 }
 
 export function createProject(title, category, dateDue) {
+    const project = {
+        title: title,
+        category: category,
+        dateDue: dateDue
+    };
+
     return (dispatch) => {
         dispatch(createProjectBegin());
-        ProjectApi.createProject(title, category, dateDue)
+        ProjectApi.createProject(project)
             .then(response => {
-                dispatch(createProjectSuccess());
+                dispatch(createProjectSuccess(response));
                 window.location.href = "/projects/" + response.id;
             })
             .catch(error => {

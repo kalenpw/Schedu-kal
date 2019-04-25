@@ -1,4 +1,4 @@
-import { GET_PROJECTS_BEGIN, GET_PROJECTS_SUCCESS, GET_PROJECTS_FAILURE } from "../Actions/project-actions.js";
+import { GET_PROJECTS_BEGIN, GET_PROJECTS_SUCCESS, GET_PROJECTS_FAILURE, CREATE_PROJECT_SUCCESS } from "../Actions/project-actions.js";
 
 const initialState = {
     projects: [],
@@ -31,5 +31,14 @@ export default function projectReducer(state = initialState, action) {
         }
     }
 
+    if(action.type === CREATE_PROJECT_SUCCESS){
+        const newProjects = state.projects.concat(action.payload);
+        return {
+            ...state,
+            projects: newProjects,
+            isLoading: false,
+            error: null,
+        }
+    }
     return state;
 }

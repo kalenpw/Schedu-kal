@@ -1,11 +1,11 @@
 import http from "Api/axios.js";
 
 export default {
-    createProject(title, category, dateDue){
+    createProject(project){
         let formData = new FormData();
-        formData.append('name', title);
-        formData.append('category', category);
-        formData.append('dateDue', dateDue);
+        formData.append('name', project.title);
+        formData.append('category', project.category);
+        formData.append('dateDue', project.dateDue);
 
         return http.post('/projects/create', formData)
             .then(response => response.data);
