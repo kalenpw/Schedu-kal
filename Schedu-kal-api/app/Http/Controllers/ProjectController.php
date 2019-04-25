@@ -13,11 +13,11 @@ class ProjectController extends Controller
             'id' => 'required',
             'name' => 'required',
         ]);
-        $task = \App\Project::where('id', $request->id)->first();
-        if ($task) {
-            $task->name = $request->name;
-            $task->save();
-            return $task;
+        $project = \App\Project::where('id', $request->id)->first();
+        if ($project) {
+            $project->name = $request->name;
+            $project->save();
+            return $project;
         }
         return "not found";
     }
@@ -30,11 +30,9 @@ class ProjectController extends Controller
         ]);
         $projectToUpdate = \App\Project::where('id', $request->id)->first();
         $dateDue = Carbon::createFromTimestampUTC(round($request->dateDue / 1000));
-        // return $dateDue;
-        // $formattedDate = $dateDue;
-        // $formattedDate = $dateDue->format("Y-m-d");
         $projectToUpdate->dateDue = $dateDue;
         $projectToUpdate->save();
+        $projectToUpdate->getTasks();
         return $projectToUpdate;
     }
 
@@ -47,7 +45,7 @@ class ProjectController extends Controller
         ]);
         $validated['dateDue'] = Carbon::createFromTimestamp(round($request->dateDue / 1000));
         $project = \App\Project::create($validated);
-        $project->setAttribute('tasks', $project->getTasks());
+        $project->getTasks();
         return $project;
     }
 
@@ -55,7 +53,7 @@ class ProjectController extends Controller
     {
         $projects = \App\Project::all();
         foreach ($projects as $project) {
-            $project->setAttribute('tasks', $project->getTasks());
+            $project->getTasks();
         }
         return $projects;
     }
@@ -63,7 +61,7 @@ class ProjectController extends Controller
     public function getProjectById($id)
     {
         $project = \App\Project::where('id', $id)->first();
-        $project->setAttribute('tasks', $project->getTasks());
+        $project->getTasks();
         return $project;
     }
 }
