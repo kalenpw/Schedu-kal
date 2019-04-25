@@ -1,7 +1,9 @@
 import React from 'react';
-import update from 'immutability-helper';
 import ProjectPreview from "Components/Project/ProjectPreview.js";
 import ProjectApi from "Api/projects.js";
+import { getProjects } from "Utils/Redux/Actions/project-actions.js";
+import { GET_PROJECTS_URL } from "Api/urls.js";
+import { connect } from 'react-redux';
 
 class ProjectList extends React.Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class ProjectList extends React.Component {
     }
 
     componentWillMount() {
+        this.props.dispatch(getProjects(GET_PROJECTS_URL));
         ProjectApi.getProjects()
             .then(response => {
                 this.setState({ projects: response });
@@ -55,7 +58,8 @@ class ProjectList extends React.Component {
     }
 
     generateProjects() {
-        let projectEles = this.state.projects.map((project) => {
+        let projectEles = this.props.projects.map((project) => {
+        // let projectEles = this.state.projects.map((project) => {
             return (
                 <div key={project.id} 
                     className="column is-half-tablet is-one-quarter-desktop"
@@ -86,4 +90,14 @@ class ProjectList extends React.Component {
     }
 }
 
-export default ProjectList;
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        projects: state.projects.projects,
+        isLoading: state.projects.isLoading,
+        error: state.projects.error,
+    }
+}
+
+// export default ProjectList;
+export default connect(mapStateToProps)(ProjectList);

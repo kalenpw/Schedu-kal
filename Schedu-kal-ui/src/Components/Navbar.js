@@ -10,7 +10,7 @@ class Navbar extends React.Component {
                     <Link to="/" className="navbar-item">
                         Home
                     </Link>
-                    <ThemeToggler classes="navbar-item"/>
+                    <ThemeToggler classes="navbar-item" />
                 </div>
             </nav>
         )

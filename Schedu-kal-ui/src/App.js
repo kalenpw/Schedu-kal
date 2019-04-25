@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeContext, themes } from "Utils/theme-context.js";
 import MainContent from "Components/MainContent.js";
+//Redux
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from 'Utils/Redux/Reducers/root.js';
+// import projectReducer from "Utils/Redux/Reducers/project-reducers.js";
+import thunk from 'redux-thunk';
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 class App extends Component {
     constructor(props) {
@@ -34,11 +42,13 @@ class App extends Component {
 
     render() {
         return (
-            <Router>
-                <ThemeContext.Provider value={this.state}>
-                    <MainContent />
-                </ThemeContext.Provider>
-            </Router>
+            <Provider store={store}>
+                <Router>
+                    <ThemeContext.Provider value={this.state}>
+                        <MainContent />
+                    </ThemeContext.Provider>
+                </Router>
+            </Provider>
         );
     }
 }
