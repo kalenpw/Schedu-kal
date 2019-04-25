@@ -4,14 +4,14 @@ import styled from "styled-components";
 import ProjectApi from "Api/projects.js";
 import { ThemeContext } from "Utils/theme-context.js";
 import ThemedInput from "Components/Forms/ThemedInput.js";
+import { connect } from "react-redux";
+import { createProject } from "Utils/Redux/Actions/project-actions.js";
 
 const ColoredBox = styled.div`
     background-color: ${props => props.theme.formBackground} !important;
 `;
 
 class DateInput extends React.Component {
-    handleClick = (event) => {
-    }
 
     render() {
         let isDark = (this.context.theme.name === "dark");
@@ -35,7 +35,6 @@ class CreateProject extends React.Component {
             title: '',
             category: '',
         }
-
     }
 
     handleTitleChange = (event) => {
@@ -52,11 +51,7 @@ class CreateProject extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        ProjectApi.createProject(this.state.title, this.state.category, this.state.selectedDate.getTime())
-            .then(response => {
-                const newProjectId = response.id;
-                window.location.href = "/projects/" + newProjectId;
-            });
+        this.props.dispatch(createProject(this.state.title, this.state.category, this.state.selectedDate.getTime()));
     }
 
     render() {
@@ -112,4 +107,4 @@ class CreateProject extends React.Component {
 CreateProject.contextType = ThemeContext;
 DateInput.contextType = ThemeContext;
 
-export default CreateProject;
+export default connect(null)(CreateProject)

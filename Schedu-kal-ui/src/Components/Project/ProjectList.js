@@ -2,7 +2,6 @@ import React from 'react';
 import ProjectPreview from "Components/Project/ProjectPreview.js";
 import ProjectApi from "Api/projects.js";
 import { getProjects } from "Utils/Redux/Actions/project-actions.js";
-import { GET_PROJECTS_URL } from "Api/urls.js";
 import { connect } from 'react-redux';
 
 class ProjectList extends React.Component {
@@ -14,11 +13,7 @@ class ProjectList extends React.Component {
     }
 
     componentWillMount() {
-        this.props.dispatch(getProjects(GET_PROJECTS_URL));
-        ProjectApi.getProjects()
-            .then(response => {
-                this.setState({ projects: response });
-            });
+        this.props.dispatch(getProjects());
     }
 
     updateProjectDateDue(id) {
@@ -59,7 +54,6 @@ class ProjectList extends React.Component {
 
     generateProjects() {
         let projectEles = this.props.projects.map((project) => {
-        // let projectEles = this.state.projects.map((project) => {
             return (
                 <div key={project.id} 
                     className="column is-half-tablet is-one-quarter-desktop"
@@ -79,7 +73,7 @@ class ProjectList extends React.Component {
     }
 
     render() {
-        if (!this.state.projects) {
+        if (!this.props.projects) {
             return <React.Fragment/>
         }
         return (
@@ -91,7 +85,6 @@ class ProjectList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         projects: state.projects.projects,
         isLoading: state.projects.isLoading,
@@ -99,5 +92,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-// export default ProjectList;
 export default connect(mapStateToProps)(ProjectList);
