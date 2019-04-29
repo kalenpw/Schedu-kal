@@ -1,7 +1,7 @@
 import http from "Api/axios.js";
 
 export default {
-    createProject(project){
+    createProject(project) {
         let formData = new FormData();
         formData.append('name', project.title);
         formData.append('category', project.category);
@@ -11,17 +11,17 @@ export default {
             .then(response => response.data);
     },
 
-    getProjects(){
+    getProjects() {
         return http.get('/projects')
             .then(response => response.data);
     },
-    
-    getProjectById(id){
+
+    getProjectById(id) {
         return http.get('/projects/' + id)
             .then(response => response.data);
     },
 
-    updateName(id, name){
+    updateName(id, name) {
         let formData = new FormData();
         formData.append('id', id);
         formData.append('name', name);
@@ -30,7 +30,20 @@ export default {
             .then(response => response.data);
     },
 
-    updateProjectDateDue(id, dateDue){
+    updateOrder(id, orderFrom, orderTo) {
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('orderFrom', orderFrom);
+        formData.append('orderTo', orderTo);
+
+        return http.post('/projects/updateOrder', formData)
+            .then(response => {
+                console.log(response);
+                return response.data 
+            });
+    },
+
+    updateProjectDateDue(id, dateDue) {
         let formData = new FormData();
         formData.append('id', id);
         formData.append('dateDue', dateDue);

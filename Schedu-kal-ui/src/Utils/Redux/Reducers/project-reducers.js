@@ -1,4 +1,4 @@
-import { GET_PROJECTS_BEGIN, GET_PROJECTS_SUCCESS, GET_PROJECTS_FAILURE, CREATE_PROJECT_SUCCESS } from "../Actions/project-actions.js";
+import { GET_PROJECTS_BEGIN, GET_PROJECTS_SUCCESS, GET_PROJECTS_FAILURE, CREATE_PROJECT_SUCCESS, UPDATE_PROJECT_ORDER_SUCCESS } from "../Actions/project-actions.js";
 
 const initialState = {
     projects: [],
@@ -40,5 +40,14 @@ export default function projectReducer(state = initialState, action) {
             error: null,
         }
     }
+
+    if(action.type === UPDATE_PROJECT_ORDER_SUCCESS){
+        return {
+            projects: action.payload,
+            isLoading: false,
+            error: null,
+        }
+    }
+
     return state;
 }
