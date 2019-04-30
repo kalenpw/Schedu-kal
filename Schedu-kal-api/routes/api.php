@@ -22,6 +22,7 @@ Route::post('/projects/create', 'ProjectController@createProject');
 Route::post('/projects/updateDateDue', 'ProjectController@updateDateDue');
 Route::post('/projects/updateName', 'ProjectController@updateName');
 Route::post('/projects/updateOrder', 'ProjectController@updateOrder');
+Route::post('/projects/updateCategory', 'ProjectController@updateCategory');
 Route::get('/projects/{id}', 'ProjectController@getProjectById');
 
 Route::post('/tasks/updateDescription', 'TaskController@updateDescription');

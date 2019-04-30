@@ -30,6 +30,15 @@ export default {
             .then(response => response.data);
     },
 
+    updateCategory(id, category) {
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('category', category);
+
+        return http.post('/projects/updateCategory', formData)
+            .then(response => response.data);
+    },
+
     updateOrder(id, orderFrom, orderTo) {
         let formData = new FormData();
         formData.append('id', id);

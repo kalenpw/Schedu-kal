@@ -54,6 +54,21 @@ class ProjectController extends Controller
         return "not found";
     }
 
+    public function updateCategory(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required',
+            'category' => 'required',
+        ]);
+        $project = \App\Project::where('id', $request->id)->first();
+        if ($project) {
+            $project->category = $request->category;
+            $project->save();
+            return $project;
+        }
+        return "not found";
+    }
+
     public function updateDateDue(Request $request)
     {
         $validated = $request->validate([

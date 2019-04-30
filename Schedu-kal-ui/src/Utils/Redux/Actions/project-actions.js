@@ -10,9 +10,13 @@ export const CREATE_PROJECT_BEGIN = "CREATE_PROJECT_BEGIN";
 export const CREATE_PROJECT_SUCCESS = "CREATE_PROJECT_SUCCESS";
 export const CREATE_PROJECT_FAILURE = "CREATE_PROJECT_FAILURE";
 
-export const UPDATE_PROJECT_ORDER_BEGIN =   "UPDATE_PROJECT_ORDER_BEGIN";
+export const UPDATE_PROJECT_ORDER_BEGIN = "UPDATE_PROJECT_ORDER_BEGIN";
 export const UPDATE_PROJECT_ORDER_SUCCESS = "UPDATE_PROJECT_ORDER_SUCCESS";
 export const UPDATE_PROJECT_ORDER_FAILURE = "UPDATE_PROJECT_ORDER_FAILURE";
+
+export const UPDATE_PROJECT_CATEGORY_BEGIN = "UPDATE_PROJECT_CATEGORY_BEGIN";
+export const UPDATE_PROJECT_CATEGORY_SUCCESS = "UPDATE_PROJECT_CATEGORY_SUCCESS";
+export const UPDATE_PROJECT_CATEGORY_FAILURE = "UPDATE_PROJECT_CATEGORY_FAILURE";
 
 export const getProjectsBegin = () => {
     return {
@@ -117,6 +121,39 @@ export function updateProjectOrder(id, orderFrom, orderTo) {
             })
             .catch(error => {
                 dispatch(updateProjectOrderFailure(error));
+            });
+    }
+}
+
+export const updateProjectCategoryBegin = () => {
+    return {
+        type: UPDATE_PROJECT_CATEGORY_BEGIN
+    }
+}
+
+export const updateProjectCategorySuccess = (projects) => {
+    return {
+        type: UPDATE_PROJECT_CATEGORY_BEGIN,
+        payload: projects
+    }
+}
+
+export const updateProjectCategoryFailure = (error) => {
+    return {
+        type: UPDATE_PROJECT_CATEGORY_BEGIN,
+        payload: error
+    }
+}
+
+export function updateProjectCategory(id, category) {
+    return (dispatch) => {
+        dispatch(updateProjectCategoryBegin());
+        ProjectApi.updateCategory(id, category)
+            .then(response => {
+                dispatch(updateProjectCategorySuccess(response));
+            })
+            .catch(error => {
+                dispatch(updateProjectCategoryFailure(error));
             });
     }
 }

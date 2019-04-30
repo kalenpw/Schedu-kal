@@ -6,9 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import ProjectApi from "Api/projects.js";
 import ProjectDate from "Components/Project/ProjectDate.js";
 import ThemedInput from "Components/Forms/ThemedInput.js";
+import CategoryPicker from "Components/Project/CategoryPicker.js";
 import { getIconFromCategory } from "Utils/project-utils.js";
 import { localDateFromYMD } from "Utils/date-utils.js";
 import { ThemeContext } from "Utils/theme-context.js";
+import { connect } from "react-redux";
+import { updateProjectCategory } from "Utils/Redux/Actions/project-actions.js";
 
 const CardWrapper = styled.div`
     background-color: ${props => props.theme.cardBackground}
@@ -41,7 +44,8 @@ class ProjectPreview extends React.Component {
         this.state = {
             startDate: null,
             showDate: false,
-            isEditting: false
+            isEditting: false,
+            isShowingIconForm: false,
         }
     }
 
@@ -80,19 +84,25 @@ class ProjectPreview extends React.Component {
     }
 
     handleBlur = () => {
-        this.setState({isEditting: false});
+        this.setState({ isEditting: false });
     }
 
-    updateCategory = (event) => {
-        event.preventDefault();
-        console.log(console.log(this.props.project.category));
+    showChangeCategory = (event) => {
+        event.stopPropagation();
+        this.setState({ isShowingIconForm: !this.state.isShowingIconForm });
+    }
+
+    handleIconChange = (event, category) => {
+        console.log(category);
+        this.props.dispatch(updateProjectCategory(this.props.project.id, category));
+        this.setState({ isShowingIconForm: false });
     }
 
     editTitle = (event) => {
-        this.setState({isEditting: true});
+        this.setState({ isEditting: true });
     }
 
-    handleDragStart = (event, projectId) =>{
+    handleDragStart = (event, projectId) => {
         this.props.handleDragStart(event, projectId);
     }
 
@@ -120,8 +130,8 @@ class ProjectPreview extends React.Component {
         const startDate = localDateFromYMD(project.dateDue);
         const categoryIcon = getIconFromCategory(project.category);
         return (
-            <CardWrapper 
-                theme={this.context.theme} 
+            <CardWrapper
+                theme={this.context.theme}
                 className="card"
                 draggable="true"
                 onDragStart={(event) => this.handleDragStart(event, this.props.project.id)}
@@ -130,9 +140,15 @@ class ProjectPreview extends React.Component {
                 <header className="card-header">
                     <div className="card-header-title">
                         <ProjectCategoryIcon
-                            onClick={this.updateCategory}
+                            onClick={this.showChangeCategory}
                         >
                             <i className={categoryIcon}></i>
+                            {
+                                this.state.isShowingIconForm &&
+                                <CategoryPicker
+                                    handleIconChange={this.handleIconChange}
+                                />
+                            }
                         </ProjectCategoryIcon>
                         <span
                             onClick={this.editTitle}
@@ -165,4 +181,4 @@ class ProjectPreview extends React.Component {
 
 ProjectPreview.contextType = ThemeContext;
 
-export default ProjectPreview;
+export default connect(null)(ProjectPreview);
