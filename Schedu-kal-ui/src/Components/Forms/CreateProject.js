@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProjectApi from "Api/projects.js";
 import { ThemeContext } from "Utils/theme-context.js";
 import ThemedInput from "Components/Forms/ThemedInput.js";
+import ThemedButton from "Components/Forms/ThemedButton.js";
 import { connect } from "react-redux";
 import { createProject } from "Utils/Redux/Actions/project-actions.js";
 
@@ -13,16 +14,18 @@ const ColoredBox = styled.div`
 
 class DateInput extends React.Component {
     
+    handleClick = (event) => {
+        event.preventDefault();
+        this.props.onClick();
+    }
+
     render() {
-        let isDark = (this.context.theme.name === "dark");
-        let buttonTheme = isDark ? 'is-light' : 'is-dark';
-        let buttonClasses = buttonTheme + " button is-outlined";
         return (
-            <p
-                className={buttonClasses}
-                onClick={this.props.onClick}>
-                {this.props.value}
-            </p>
+            <ThemedButton
+                buttonText={this.props.value}
+                handleClick={(event) => this.handleClick(event)}
+                buttonClasses="is-outlined"
+            />
         )
     }
 }
