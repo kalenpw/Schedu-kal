@@ -6,7 +6,6 @@ import MainContent from "Components/MainContent.js";
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducer from 'Utils/Redux/Reducers/root.js';
-// import projectReducer from "Utils/Redux/Reducers/project-reducers.js";
 import thunk from 'redux-thunk';
 
 const store = createStore(reducer, applyMiddleware(thunk));

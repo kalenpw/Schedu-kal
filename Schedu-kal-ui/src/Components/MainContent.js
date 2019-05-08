@@ -3,13 +3,8 @@ import {  Route, Switch} from "react-router-dom";
 import { ThemeContext } from "Utils/theme-context.js";
 import Navbar from "Components/Navbar.js";
 import Home from "Views/Home.js";
-import Project from "Views/Project";
-
-function Error(props) {
-    return (
-        <h1>does not exist</h1>
-    )
-}
+import Project from "Views/Project.js";
+import NotFound from "Views/NotFound.js";
 
 class AppRoot extends React.Component {
     render() {
@@ -29,7 +24,7 @@ class AppRoot extends React.Component {
                                 path="/projects/:id"
                                 component={Project}
                             />
-                            <Route component={Error} />
+                            <Route component={NotFound} />
                         </Switch>
                     </div>
                 </div>
