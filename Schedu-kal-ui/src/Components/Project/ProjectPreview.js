@@ -12,26 +12,8 @@ import { localDateFromYMD } from "Utils/date-utils.js";
 import { ThemeContext } from "Utils/theme-context.js";
 import { connect } from "react-redux";
 import { updateProjectCategory } from "Utils/Redux/Actions/project-actions.js";
+import ThemedCard from "Components/UI/ThemedCard.js";
 
-const CardWrapper = styled.div`
-    background-color: ${props => props.theme.cardBackground}
-    border-radius: 5px;
-    color: #ddd;
-    display: flex;
-    flex-direction: column;
-    height: 100%;    
-    .card-header-title{
-        color: ${props => props.theme.fontColor}
-    }
-    .card-footer{
-        margin-top: auto;
-        color: ${props => props.theme.fontColor}
-    }
-
-    li{
-        color: ${props => props.theme.fontColor}
-    }
-`;
 
 const ProjectCategoryIcon = styled.span`
     padding-right: 10px;
@@ -130,7 +112,7 @@ class ProjectPreview extends React.Component {
         const startDate = localDateFromYMD(project.dateDue);
         const categoryIcon = getIconFromCategory(project.category);
         return (
-            <CardWrapper
+            <ThemedCard
                 theme={this.context.theme}
                 className="card"
                 draggable="true"
@@ -174,7 +156,7 @@ class ProjectPreview extends React.Component {
                         Details
                     </Link>
                 </footer>
-            </CardWrapper>
+            </ThemedCard>
         )
     }
 }

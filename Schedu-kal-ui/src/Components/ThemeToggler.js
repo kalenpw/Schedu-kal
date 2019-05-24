@@ -12,7 +12,7 @@ class ThemeToggler extends React.Component {
         return (
             <a
                 className={classes}
-                onClick={toggleTheme}
+                onClick={() => toggleTheme(false)}
                 style={styles}
             >
                 <i className={fontAwesomeIcon}></i>

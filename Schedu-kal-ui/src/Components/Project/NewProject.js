@@ -2,27 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CreateProject from "Components/Forms/CreateProject.js";
 import { ThemeContext } from "Utils/theme-context.js";
-
-const CardWrapper = styled.div`
-    cursor: pointer;
-    background-color: ${props => props.theme.cardBackground}
-    border-radius: 5px;
-    color: #ddd;
-    display: flex;
-    flex-direction: column;
-    height: 100%;    
-    .card-header-title{
-        color: ${props => props.theme.fontColor}
-    }
-    .card-footer{
-        margin-top: auto;
-        color: ${props => props.theme.fontColor}
-    }
-
-    li{
-        color: ${props => props.theme.fontColor}
-    }
-`;
+import ThemedCard from "Components/UI/ThemedCard.js";
 
 const ThemedIcon = styled.i`
     color: ${props => props.theme.fontColor}
@@ -54,7 +34,7 @@ class NewProject extends React.Component {
                 <div className="column"
                     onClick={this.createProject}
                 >
-                    <CardWrapper theme={this.context.theme} className="card">
+                    <ThemedCard className="card">
                         <header className="card-header">
                             <div className="card-header-title">
                                 New Project
@@ -63,7 +43,7 @@ class NewProject extends React.Component {
                         <div className="card-content section has-text-centered is-size-1">
                             <ThemedIcon className={iconClass}/>
                         </div>
-                    </CardWrapper>
+                    </ThemedCard>
 
                 </div>
                 {

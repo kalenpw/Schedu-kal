@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import ThemeToggler from "Components/ThemeToggler.js";
+import ModalButton from "Components/UI/ModalButton.js";
+import UserSettings from "Components/Settings/UserSettings.js";
 
 class Navbar extends React.Component {
     render() {
@@ -10,6 +12,10 @@ class Navbar extends React.Component {
                     <Link to="/" className="navbar-item">
                         Home
                     </Link>
+                    <ModalButton
+                        text="Settings" j
+                        modalContent={<UserSettings/>}
+                    />
                     <ThemeToggler classes="navbar-item" />
                 </div>
             </nav>

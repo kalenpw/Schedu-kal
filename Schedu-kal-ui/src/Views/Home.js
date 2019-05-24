@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectList from "Components/Project/ProjectList.js";
 import NewProject from "Components/Project/NewProject.js";
+import ThemedText from "Components/UI/ThemedText.js";
 
 class Home extends React.Component {
     componentWillMount() {

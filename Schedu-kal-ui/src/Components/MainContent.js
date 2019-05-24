@@ -1,18 +1,19 @@
 import React from 'react';
-import {  Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { ThemeContext } from "Utils/theme-context.js";
 import Navbar from "Components/Navbar.js";
 import Home from "Views/Home.js";
 import Project from "Views/Project.js";
 import NotFound from "Views/NotFound.js";
+import ThemedHero from "Components/UI/ThemedHero.js";
 
 class AppRoot extends React.Component {
     render() {
         const themeClasses = this.context.theme.heroClass + " hero is-fullheight";
         return (
-            <div className={themeClasses}>
+            <ThemedHero>
                 <div className="hero-head">
-                    <Navbar/>
+                    <Navbar />
                     <div className="section">
                         <Switch>
                             <Route
@@ -28,7 +29,7 @@ class AppRoot extends React.Component {
                         </Switch>
                     </div>
                 </div>
-            </div>
+            </ThemedHero>
         )
     }
 }
