@@ -6,29 +6,32 @@ import Home from "Views/Home.js";
 import Project from "Views/Project.js";
 import NotFound from "Views/NotFound.js";
 import ThemedHero from "Components/UI/ThemedHero.js";
+import ThemedText from "Components/UI/ThemedText.js";
 
 class AppRoot extends React.Component {
     render() {
         const themeClasses = this.context.theme.heroClass + " hero is-fullheight";
         return (
             <ThemedHero>
-                <div className="hero-head">
-                    <Navbar />
-                    <div className="section">
-                        <Switch>
-                            <Route
-                                exact
-                                path="/"
-                                component={Home}
-                            />
-                            <Route
-                                path="/projects/:id"
-                                component={Project}
-                            />
-                            <Route component={NotFound} />
-                        </Switch>
+                <ThemedText>
+                    <div className="hero-head">
+                        <Navbar />
+                        <div className="section">
+                            <Switch>
+                                <Route
+                                    exact
+                                    path="/"
+                                    component={Home}
+                                />
+                                <Route
+                                    path="/projects/:id"
+                                    component={Project}
+                                />
+                                <Route component={NotFound} />
+                            </Switch>
+                        </div>
                     </div>
-                </div>
+                </ThemedText>
             </ThemedHero>
         )
     }

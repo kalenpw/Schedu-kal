@@ -4,14 +4,17 @@ import { ThemeContext } from "Utils/theme-context.js";
 
 const Wrapper = styled.div`
     color: ${props => props.theme.fontColor};
+    * {
+        color: ${props => props.theme.fontColor};
+    }
 `;
 
-class ThemedText extends React.Component{
-    render(){
+class ThemedText extends React.Component {
+    render() {
         return (
             <Wrapper
                 theme={this.context.theme}
-                className={this.props.classes}         
+                className={this.props.classes}
             >
                 {this.props.children}
             </Wrapper>
