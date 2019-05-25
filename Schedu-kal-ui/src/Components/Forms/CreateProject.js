@@ -7,6 +7,7 @@ import ThemedInput from "Components/Forms/ThemedInput.js";
 import ThemedButton from "Components/Forms/ThemedButton.js";
 import { connect } from "react-redux";
 import { createProject } from "Utils/Redux/Actions/project-actions.js";
+import ThemedCard from "Components/UI/ThemedCard.js";
 
 const ColoredBox = styled.div`
     background-color: ${props => props.theme.formBackground} !important;
@@ -59,7 +60,7 @@ class CreateProject extends React.Component {
 
     render() {
         return (
-            <ColoredBox theme={this.context.theme} className="box">
+            <ThemedCard theme={this.context.theme} classes="box">
                 <form>
                     <h2 className="title">New Project</h2>
                     <div className="field">
@@ -102,7 +103,7 @@ class CreateProject extends React.Component {
                         </p>
                     </div>
                 </form>
-            </ColoredBox>
+            </ThemedCard>
         )
     }
 }

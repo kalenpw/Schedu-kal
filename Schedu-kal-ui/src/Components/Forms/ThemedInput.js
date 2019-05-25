@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ThemeContext } from "Utils/theme-context.js";
 
 const Input = styled.input`
-    background-color: ${props => props.theme.inputBackground}
+    background-color: ${props => props.theme.primaryColor}
     color: ${props => props.theme.fontColor}
     &::placeholder {
         color: rgba(150, 150, 150, .8);

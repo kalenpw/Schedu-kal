@@ -12,7 +12,7 @@ class NewProject extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isModalVisible: false
+            isModalVisible: true
         }
     }
 

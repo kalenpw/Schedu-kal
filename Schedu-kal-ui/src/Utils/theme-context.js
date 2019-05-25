@@ -5,27 +5,18 @@ export const themes = {
         name: "light",
         primaryColor: '#fff',
         primaryVariant: '#eee',
-        heroClass: "is-white",
-        cardBackground: '#eee',
         fontColor: '#222',
-        formBackground: '#fff',
-        inputBackground: '#fff',
     },
     dark: {
         name: "dark",
         primaryColor: '#333',
         primaryVariant: '#222',
-        heroClass: 'is-dark',
-        cardBackground: '#222',
         fontColor: '#ddd',
-        formBackground: '#222',
-        inputBackground: '#2f2f2f',
     },
     custom: {
         name: "custom",
         primaryColor: localStorage.getItem('primaryColor'),
         primaryVariant: calculateVariant(localStorage.getItem('primaryColor')),
-        cardBackground: localStorage.getItem('primaryColor'),
         fontColor: 'red',
     }
 };

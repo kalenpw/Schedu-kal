@@ -13,38 +13,42 @@ const store = createStore(reducer, applyMiddleware(thunk));
 class App extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            theme: themes.light,
+            toggleTheme: this.toggleTheme,
+        };
 
-        const theme = localStorage.getItem("theme");
-        if (theme === "light") {
-            this.state = {
-                theme: themes.light,
-                toggleTheme: this.toggleTheme,
-            };
-        }
-        else {
-            this.state = {
-                theme: themes.dark,
-                toggleTheme: this.toggleTheme,
-            };
-        }
+        // const theme = localStorage.getItem("theme");
+        // if (theme === "light") {
+        //     this.state = {
+        //         theme: themes.light,
+        //         toggleTheme: this.toggleTheme,
+        //     };
+        // }
+        // else {
+        //     this.state = {
+        //         theme: themes.dark,
+        //         toggleTheme: this.toggleTheme,
+        //     };
+        // }
     }
 
     toggleTheme = (isColorUpdate) => {
-        if(isColorUpdate){
-            this.setState({theme: themes[this.state.theme.name]})
+        if (isColorUpdate) {
+            this.setState({ theme: themes[this.state.theme.name] })
         }
-        else{
+        else {
             let newTheme = null;
-            if(this.state.theme.name === "light"){
+            if (this.state.theme.name === "light") {
                 newTheme = themes.dark;
             }
-            else if(this.state.theme.name === "dark"){
+            else if (this.state.theme.name === "dark") {
                 newTheme = themes.custom;
             }
-            else{
+            else {
                 newTheme = themes.light;
             }
-            this.setState({theme: newTheme});
+            this.setState({ theme: newTheme });
         }
         // this.setState(state => ({
         //     theme:

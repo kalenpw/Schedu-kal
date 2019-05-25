@@ -7,6 +7,9 @@ const Wrapper = styled.div`
     * {
         color: ${props => props.theme.fontColor};
     }
+    i{
+        color: ${props => props.theme.fontColor} !important;
+    }
 `;
 
 class ThemedText extends React.Component {
